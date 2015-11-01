@@ -11,15 +11,15 @@
 
 namespace hhpack\stopwatch;
 
-use hhpack\stopwatch\range\DateTimeRange;
-use hhpack\stopwatch\range\MicrotimeRange;
+use hhpack\stopwatch\result\DateTimeResult;
+use hhpack\stopwatch\result\MicrotimeResult;
 
 final class ProcessingTime
 {
 
     public function __construct(
-        private MicrotimeRange $microtimeRange = new MicrotimeRange(),
-        private DateTimeRange $dateTimeRange = new DateTimeRange()
+        private MicrotimeResult $microtimeRange = new MicrotimeResult(),
+        private DateTimeResult $dateTimeRange = new DateTimeResult()
     )
     {
     }

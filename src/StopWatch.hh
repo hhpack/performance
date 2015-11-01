@@ -18,31 +18,48 @@ use DateTimeImmutable;
 final class StopWatch implements Watcher<ProcessingTime>
 {
 
-    private float $startAt = 0.0;
-    private DateTimeImmutable $startDateTime;
+//    private float $startAt = 0.0;
+//    private DateTimeImmutable $startDateTime;
+
+//    private float $startAt = 0.0;
+    private DateTimeWatcher $dateTimeWatcher;
+    private ProcessingTimeWatcher $processingTimeWatcher;
     private ProcessingTime $processingTime;
 
     public function __construct()
     {
+        $this->dateTimeWatcher = new DateTimeWatcher();
+        $this->processingTimeWatcher = new ProcessingTimeWatcher();
         $this->processingTime = new ProcessingTime();
-        $this->startDateTime = new DateTimeImmutable();
     }
 
     public function start() : void
     {
-        $this->startAt = (float) microtime(true);
-        $this->startDateTime = new DateTimeImmutable();
+        $watchers = [
+            $this->dateTimeWatcher,
+            $this->processingTimeWatcher
+        ];
+
+        foreach ($watchers as $watcher) {
+            $watcher->start();
+        }
     }
 
     public function stop() : void
     {
-        $stopAt = (float) microtime(true);
-        $stopDateTime = new DateTimeImmutable();
+        $watchers = [
+            $this->dateTimeWatcher,
+            $this->processingTimeWatcher
+        ];
 
-        $dateTimeRange = DateTimeRange::createFrom( Pair { $this->startDateTime, $stopDateTime } );
-        $microtimeRange = MicrotimeRange::createFrom( Pair { $this->startAt, $stopAt } );
+        foreach ($watchers as $watcher) {
+            $watcher->stop();
+        }
 
-        $this->processingTime = new ProcessingTime($microtimeRange, $dateTimeRange);
+        $this->processingTime = new ProcessingTime(
+            $this->processingTimeWatcher->getResult(),
+            $this->dateTimeWatcher->getResult()
+        );
     }
 
     public function getResult() : ProcessingTime
