@@ -20,8 +20,7 @@
   "autoload": {
     "psr-4": {
       "hhpack\\stopwatch\\": "src/"
-    },
-    "files": [ "src/bootstrap.hh" ]
+    }
   },
   "scripts": {
     "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh spec"
