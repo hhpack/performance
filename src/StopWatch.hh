@@ -13,24 +13,19 @@ namespace hhpack\stopwatch;
 
 use hhpack\stopwatch\range\DateTimeRange;
 use hhpack\stopwatch\range\MicrotimeRange;
-use DateTimeImmutable;
 
-final class StopWatch implements Watcher<ProcessingTime>
+final class StopWatch implements Watcher<Result>
 {
 
-//    private float $startAt = 0.0;
-//    private DateTimeImmutable $startDateTime;
-
-//    private float $startAt = 0.0;
     private DateTimeWatcher $dateTimeWatcher;
     private ProcessingTimeWatcher $processingTimeWatcher;
-    private ProcessingTime $processingTime;
+    private Result $result;
 
     public function __construct()
     {
         $this->dateTimeWatcher = new DateTimeWatcher();
         $this->processingTimeWatcher = new ProcessingTimeWatcher();
-        $this->processingTime = new ProcessingTime();
+        $this->result = new Result();
     }
 
     public function start() : void
@@ -56,15 +51,15 @@ final class StopWatch implements Watcher<ProcessingTime>
             $watcher->stop();
         }
 
-        $this->processingTime = new ProcessingTime(
+        $this->result = new Result(
             $this->processingTimeWatcher->getResult(),
             $this->dateTimeWatcher->getResult()
         );
     }
 
-    public function getResult() : ProcessingTime
+    public function getResult() : Result
     {
-        return $this->processingTime;
+        return $this->result;
     }
 
 }

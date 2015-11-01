@@ -14,7 +14,7 @@ namespace hhpack\stopwatch;
 use hhpack\stopwatch\result\DateTimeResult;
 use hhpack\stopwatch\result\MicrotimeResult;
 
-final class ProcessingTime
+final class Result
 {
 
     public function __construct(
