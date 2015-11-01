@@ -11,7 +11,8 @@
 
 namespace hhpack\stopwatch;
 
-interface Watcher<T> extends Watchable
+interface Watchable
 {
-    public function getResult() : T;
+    public function start() : void;
+    public function stop() : void;
 }

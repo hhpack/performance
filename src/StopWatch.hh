@@ -30,24 +30,14 @@ final class StopWatch implements Watcher<Result>
 
     public function start() : void
     {
-        $watchers = [
-            $this->dateTimeWatcher,
-            $this->processingTimeWatcher
-        ];
-
-        foreach ($watchers as $watcher) {
+        foreach ($this->watchers()->items() as $watcher) {
             $watcher->start();
         }
     }
 
     public function stop() : void
     {
-        $watchers = [
-            $this->dateTimeWatcher,
-            $this->processingTimeWatcher
-        ];
-
-        foreach ($watchers as $watcher) {
+        foreach ($this->watchers()->items() as $watcher) {
             $watcher->stop();
         }
 
@@ -55,6 +45,17 @@ final class StopWatch implements Watcher<Result>
             $this->processingTimeWatcher->getResult(),
             $this->dateTimeWatcher->getResult()
         );
+    }
+
+    <<__Memoize>>
+    private function watchers() : ImmVector<Watchable>
+    {
+        $watchers = [
+            $this->dateTimeWatcher,
+            $this->processingTimeWatcher
+        ];
+
+        return ImmVector::fromItems($watchers);
     }
 
     public function getResult() : Result
