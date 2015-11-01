@@ -15,7 +15,7 @@ use hhpack\stopwatch\range\DateTimeRange;
 use hhpack\stopwatch\range\MicrotimeRange;
 use DateTimeImmutable;
 
-final class StopWatch
+final class StopWatch implements Watcher<ProcessingTime>
 {
 
     private float $startAt = 0.0;
