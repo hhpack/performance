@@ -13,41 +13,54 @@ namespace hhpack\stopwatch;
 
 use hhpack\stopwatch\range\DateTimeRange;
 use hhpack\stopwatch\range\MicrotimeRange;
-use DateTimeImmutable;
 
-final class StopWatch
+final class StopWatch implements Watcher<Result>
 {
 
-    private float $startAt = 0.0;
-    private DateTimeImmutable $startDateTime;
-    private ProcessingTime $processingTime;
+    private DateTimeWatcher $dateTimeWatcher;
+    private ProcessingTimeWatcher $processingTimeWatcher;
+    private Result $result;
 
     public function __construct()
     {
-        $this->processingTime = new ProcessingTime();
-        $this->startDateTime = new DateTimeImmutable();
+        $this->dateTimeWatcher = new DateTimeWatcher();
+        $this->processingTimeWatcher = new ProcessingTimeWatcher();
+        $this->result = new Result();
     }
 
     public function start() : void
     {
-        $this->startAt = (float) microtime(true);
-        $this->startDateTime = new DateTimeImmutable();
+        foreach ($this->watchers()->items() as $watcher) {
+            $watcher->start();
+        }
     }
 
     public function stop() : void
     {
-        $stopAt = (float) microtime(true);
-        $stopDateTime = new DateTimeImmutable();
+        foreach ($this->watchers()->items() as $watcher) {
+            $watcher->stop();
+        }
 
-        $dateTimeRange = DateTimeRange::createFrom( Pair { $this->startDateTime, $stopDateTime } );
-        $microtimeRange = MicrotimeRange::createFrom( Pair { $this->startAt, $stopAt } );
-
-        $this->processingTime = new ProcessingTime($microtimeRange, $dateTimeRange);
+        $this->result = new Result(
+            $this->processingTimeWatcher->getResult(),
+            $this->dateTimeWatcher->getResult()
+        );
     }
 
-    public function getResult() : ProcessingTime
+    <<__Memoize>>
+    private function watchers() : ImmVector<Watchable>
     {
-        return $this->processingTime;
+        $watchers = [
+            $this->dateTimeWatcher,
+            $this->processingTimeWatcher
+        ];
+
+        return ImmVector::fromItems($watchers);
+    }
+
+    public function getResult() : Result
+    {
+        return $this->result;
     }
 
 }

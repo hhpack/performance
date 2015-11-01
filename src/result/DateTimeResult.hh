@@ -9,35 +9,35 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\stopwatch\range;
+namespace hhpack\stopwatch\result;
 
 use hhpack\stopwatch\Range;
 use DateInterval;
 use DateTimeImmutable;
 
-final class DateTimeRange implements Range<DateTimeImmutable, DateInterval>
+final class DateTimeResult implements Range<DateTimeImmutable, DateInterval>
 {
 
     public function __construct(
-        private DateTimeImmutable $startAt = new DateTimeImmutable(),
-        private DateTimeImmutable $endAt = new DateTimeImmutable()
+        private DateTimeImmutable $startedAt = new DateTimeImmutable(),
+        private DateTimeImmutable $stoppedAt = new DateTimeImmutable()
     )
     {
     }
 
     public function getStartedValue() : DateTimeImmutable
     {
-        return $this->startAt;
+        return $this->startedAt;
     }
 
     public function getStoppedValue() : DateTimeImmutable
     {
-        return $this->endAt;
+        return $this->stoppedAt;
     }
 
     public function diff() : DateInterval
     {
-        return $this->endAt->diff($this->startAt);
+        return $this->stoppedAt->diff($this->startedAt);
     }
 
     public static function createFrom(Pair<DateTimeImmutable, DateTimeImmutable> $range) : this
