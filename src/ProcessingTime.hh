@@ -11,30 +11,33 @@
 
 namespace hhpack\stopwatch;
 
+use hhpack\stopwatch\range\DateTimeRange;
+use hhpack\stopwatch\range\MicrotimeRange;
+
 final class ProcessingTime
 {
 
     public function __construct(
-        private float $startAt = 0.0,
-        private float $stopAt = 0.0
+        private MicrotimeRange $microtimeRange = new MicrotimeRange(),
+        private DateTimeRange $dateTimeRange = new DateTimeRange()
     )
     {
     }
 
-    public function getStartAt() : float
+    public function getStartedMicrotime() : float
     {
-        return $this->startAt;
+        return $this->microtimeRange->getStartedValue();
     }
 
-    public function getStopAt() : float
+    public function getStoppedMicrotime() : float
     {
-        return $this->stopAt;
+        return $this->microtimeRange->getStoppedValue();
     }
 
     <<__Memoize>>
     public function getProcessingTime() : float
     {
-        return $this->stopAt - $this->startAt;
+        return $this->microtimeRange->diff();
     }
 
 }
