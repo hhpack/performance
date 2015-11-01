@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\stopwatch\range;
+namespace hhpack\stopwatch\result;
 
 use hhpack\stopwatch\Range;
 
@@ -17,7 +17,7 @@ final class MicrotimeResult implements Range<float, float>
 {
 
     public function __construct(
-        private float $startAt = 0.0,
+        private float $startedAt = 0.0,
         private float $stoppedAt = 0.0
     )
     {
@@ -25,7 +25,7 @@ final class MicrotimeResult implements Range<float, float>
 
     public function getStartedValue() : float
     {
-        return $this->startAt;
+        return $this->startedAt;
     }
 
     public function getStoppedValue() : float
@@ -36,7 +36,7 @@ final class MicrotimeResult implements Range<float, float>
     <<__Memoize>>
     public function diff() : float
     {
-        return $this->stoppedAt - $this->startAt;
+        return $this->stoppedAt - $this->startedAt;
     }
 
     public static function createFrom(Pair<float, float> $range) : this

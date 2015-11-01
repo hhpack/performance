@@ -19,7 +19,7 @@ final class DateTimeResult implements Range<DateTimeImmutable, DateInterval>
 {
 
     public function __construct(
-        private DateTimeImmutable $startAt = new DateTimeImmutable(),
+        private DateTimeImmutable $startedAt = new DateTimeImmutable(),
         private DateTimeImmutable $stoppedAt = new DateTimeImmutable()
     )
     {
@@ -27,7 +27,7 @@ final class DateTimeResult implements Range<DateTimeImmutable, DateInterval>
 
     public function getStartedValue() : DateTimeImmutable
     {
-        return $this->startAt;
+        return $this->startedAt;
     }
 
     public function getStoppedValue() : DateTimeImmutable
@@ -37,7 +37,7 @@ final class DateTimeResult implements Range<DateTimeImmutable, DateInterval>
 
     public function diff() : DateInterval
     {
-        return $this->stoppedAt->diff($this->startAt);
+        return $this->stoppedAt->diff($this->startedAt);
     }
 
     public static function createFrom(Pair<DateTimeImmutable, DateTimeImmutable> $range) : this
