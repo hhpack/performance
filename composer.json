@@ -1,0 +1,29 @@
+{
+  "name": "hhpack/stopwatch",
+  "keywords": [ "timer", "hack", "stopwatch" ],
+  "description": "Stopwatch for Hack",
+  "authors": [
+    {
+      "name": "Noritaka Horio",
+      "email": "holy.shared.design@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "hhvm": ">=3.6"
+  },
+  "require-dev": {
+    "expect/peridot-expect-plugin": "~3.0",
+    "peridot-php/peridot": "~1.16",
+    "peridot-php/peridot-dot-reporter": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "hhpack\\stopwatch\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh spec"
+  },
+  "minimum-stability": "stable"
+}
