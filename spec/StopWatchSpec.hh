@@ -1,5 +1,7 @@
 <?hh //partial
 
+namespace hhpack\stopwatch\spec;
+
 use hhpack\stopwatch\StopWatch;
 
 describe(StopWatch::class, function() {
