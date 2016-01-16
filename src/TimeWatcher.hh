@@ -13,16 +13,23 @@ namespace hhpack\stopwatch;
 
 use hhpack\stopwatch\result\WatchedResult;
 
-final class TimeWatcher implements Watcher<WatchedResult<float>>
+final class TimeWatcher implements NamedWatcher<WatchedResult<float>>
 {
 
     private float $startedAt;
     private WatchedResult<float> $processingTime;
 
-    public function __construct()
+    public function __construct(
+        private string $name
+    )
     {
         $this->startedAt = (float) microtime(true);
         $this->processingTime = new WatchedResult(0.0, 0.0);
+    }
+
+    public function name() : string
+    {
+        return $this->name;
     }
 
     public function start() : void
