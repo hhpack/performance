@@ -11,10 +11,10 @@
 
 namespace hhpack\stopwatch;
 
-interface Range<Ti, To>
+interface Range<T>
 {
-    public function getStartedValue() : Ti;
-    public function getStoppedValue() : Ti;
-    public function diff() : To;
-    public static function createFrom(Pair<Ti, Ti> $range) : this;
+    public function first() : T;
+    public function last() : T;
+    public function diff() : T;
+    public static function from(Pair<T, T> $range) : this;
 }
