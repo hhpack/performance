@@ -13,5 +13,5 @@ namespace hhpack\stopwatch;
 
 interface Watcher<T> extends Watchable
 {
-    public function getResult() : T;
+    public function result() : T;
 }

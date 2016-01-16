@@ -38,7 +38,7 @@ final class DateTimeWatcher implements Watcher<DateTimeResult>
         $this->processingDateTime = DateTimeResult::createFrom($result);
     }
 
-    public function getResult() : DateTimeResult
+    public function result() : DateTimeResult
     {
         return $this->processingDateTime;
     }

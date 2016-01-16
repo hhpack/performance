@@ -38,7 +38,7 @@ final class ProcessingTimeWatcher implements Watcher<MicrotimeResult>
         $this->processingTime = MicrotimeResult::createFrom($result);
     }
 
-    public function getResult() : MicrotimeResult
+    public function result() : MicrotimeResult
     {
         return $this->processingTime;
     }

@@ -42,8 +42,8 @@ final class StopWatch implements Watcher<Result>
         }
 
         $this->result = new Result(
-            $this->processingTimeWatcher->getResult(),
-            $this->dateTimeWatcher->getResult()
+            $this->processingTimeWatcher->result(),
+            $this->dateTimeWatcher->result()
         );
     }
 
@@ -58,7 +58,7 @@ final class StopWatch implements Watcher<Result>
         return ImmVector::fromItems($watchers);
     }
 
-    public function getResult() : Result
+    public function result() : Result
     {
         return $this->result;
     }
