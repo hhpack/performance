@@ -16,38 +16,39 @@ use hhpack\stopwatch\result\WatchedResult;
 final class PerformanceWatcher implements Watcher<ImmMap<string, WatchedResult<num>>>
 {
 
-    private Vector<NamedWatcher<WatchedResult<num>>> $watchers;
+    private Map<string, Watcher<WatchedResult<num>>> $watchers;
 
     public function __construct(
-        Traversable<NamedWatcher<WatchedResult<num>>> $watchers = []
+        KeyedTraversable<string, Watcher<WatchedResult<num>>> $watchers = []
     )
     {
-        $this->watchers = Vector::fromItems($watchers);
+        $items = Vector {};
+
+        foreach ($watchers as $key => $watcher) {
+            $items->add(Pair { $key, $watcher });
+        }
+
+        $this->watchers = Map::fromItems($items);
     }
 
     public function start() : void
     {
-        foreach ($this->watchers as $watcher) {
+        foreach ($this->watchers->values() as $watcher) {
             $watcher->start();
         }
     }
 
     public function stop() : void
     {
-        foreach ($this->watchers as $watcher) {
+        foreach ($this->watchers->values() as $watcher) {
             $watcher->stop();
         }
     }
 
     public function result() : ImmMap<string, WatchedResult<num>>
     {
-        $result = Map {};
-
-        foreach ($this->watchers as $watcher) {
-            $result->set($watcher->name(), $watcher->result());
-        }
-
-        return $result->toImmMap();
+        return $this->watchers->map(($watcher) ==> $watcher->result())
+            ->toImmMap();
     }
 
 }
