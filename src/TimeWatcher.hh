@@ -35,7 +35,7 @@ final class TimeWatcher implements Watcher<WatchedResult<float>>
         $stoppedAt = (float) microtime(true);
 
         $result = Pair { $this->startedAt, $stoppedAt };
-        $this->processingTime = WatchedResult::from($result);
+        $this->processingTime = WatchedResult::of($result);
     }
 
     public function result() : WatchedResult<float>

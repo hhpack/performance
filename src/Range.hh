@@ -16,5 +16,5 @@ interface Range<T>
     public function first() : T;
     public function last() : T;
     public function diff() : T;
-    public static function from(Pair<T, T> $range) : this;
+    public static function of(Pair<T, T> $range) : this;
 }

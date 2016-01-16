@@ -39,7 +39,7 @@ final class WatchedResult<T as num> implements Range<T>
         return $this->last - $this->first;
     }
 
-    public static function from(Pair<T, T> $range) : this
+    public static function of(Pair<T, T> $range) : this
     {
         list($first, $last) = $range;
         return new static($first, $last);
