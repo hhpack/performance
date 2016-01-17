@@ -12,15 +12,26 @@ Basic usage
 You can measure the time of easy processing.
 
 ```hack
-use hhpack\stopwatch\StopWatch;
+use hhpack\performance\PerformanceWatcher;
+use hhpack\performance\TimeWatcher;
+use hhpack\performance\MemoryWatcher;
+use hhpack\performance\result\WatchedResult;
 
-$stopWatch = new StopWatch();
-$stopWatch->start();
-$stopWatch->stop();
+$watcher = PerformanceWatcher::fromItems([
+  Pair { 'time', new TimeWatcher() },
+  Pair { 'memory', new MemoryWatcher() }
+]);
 
-$result = $stopWatch->getResult();
+$watcher->start();
+$watcher->stop();
 
-echo $result;
+$texts = $watcher->result()->mapWithKey(($key, $result) ==> {
+  return sprintf("%s: %s", $key, (string) $result->diff());
+})->values();
+
+foreach ($texts as $text) {
+  echo $text, PHP_EOL;
+}
 ```
 
 Run the test
