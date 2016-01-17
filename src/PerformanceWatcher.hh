@@ -51,4 +51,9 @@ final class PerformanceWatcher implements Watcher<ImmMap<string, WatchedResult<n
             ->toImmMap();
     }
 
+    public static function fromItems(Traversable<Pair<string, Watcher<WatchedResult<num>>>> $watchers) : this
+    {
+        return new static(ImmMap::fromItems($watchers));
+    }
+
 }
