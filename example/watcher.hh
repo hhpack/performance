@@ -13,7 +13,6 @@ namespace hhpack\performance\example;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-//use hhpack\performance\result\WatchedResult;
 use hhpack\performance\PerformanceWatcher;
 use hhpack\performance\TimeWatcher;
 use hhpack\performance\MemoryWatcher;
