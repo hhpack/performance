@@ -1,10 +1,10 @@
-stopwatch
+performance
 ========================================
 
-[![Latest Stable Version](https://poser.pugx.org/hhpack/stopwatch/v/stable)](https://packagist.org/packages/hhpack/stopwatch)
-[![Build Status](https://travis-ci.org/hhpack/stopwatch.svg?branch=master)](https://travis-ci.org/hhpack/stopwatch)
-[![Dependency Status](https://www.versioneye.com/user/projects/5635c29f36d0ab0019001d2a/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5635c29f36d0ab0019001d2a)
-[![License](https://poser.pugx.org/hhpack/stopwatch/license)](https://packagist.org/packages/hhpack/stopwatch)
+[![Latest Stable Version](https://poser.pugx.org/hhpack/performance/v/stable)](https://packagist.org/packages/hhpack/performance)
+[![Build Status](https://travis-ci.org/hhpack/performance.svg?branch=master)](https://travis-ci.org/hhpack/performance)
+[![Dependency Status](https://www.versioneye.com/user/projects/569b4a0fed08610040000043/badge.svg?style=flat)](https://www.versioneye.com/user/projects/569b4a0fed08610040000043)
+[![License](https://poser.pugx.org/hhpack/performance/license)](https://packagist.org/packages/hhpack/performance)
 
 Basic usage
 ------------------------------------------------
