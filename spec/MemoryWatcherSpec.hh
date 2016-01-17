@@ -1,8 +1,8 @@
 <?hh //partial
 
-namespace hhpack\stopwatch\spec;
+namespace hhpack\performance\spec;
 
-use hhpack\stopwatch\MemoryWatcher;
+use hhpack\performance\MemoryWatcher;
 
 describe(MemoryWatcher::class, function() {
   describe('->stop()', function() {

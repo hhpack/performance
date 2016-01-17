@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\stopwatch.
+ * This file is part of hhpack\performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\stopwatch;
+namespace hhpack\performance;
 
-use hhpack\stopwatch\result\WatchedResult;
+use hhpack\performance\result\WatchedResult;
 
 final class TimeWatcher implements Watcher<WatchedResult<float>>
 {

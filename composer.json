@@ -1,7 +1,7 @@
 {
-  "name": "hhpack/stopwatch",
-  "keywords": [ "timer", "hack", "stopwatch" ],
-  "description": "Stopwatch for Hack",
+  "name": "hhpack/performance",
+  "keywords": [ "timer", "hack", "performance", "time", "memory" ],
+  "description": "performance utility library for Hack",
   "authors": [
     {
       "name": "Noritaka Horio",
@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "hhpack\\stopwatch\\": "src/"
+      "hhpack\\performance\\": "src/"
     }
   },
   "scripts": {

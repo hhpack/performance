@@ -1,7 +1,7 @@
 <?hh //partial
 
 /**
- * This file is part of hhpack\stopwatch.
+ * This file is part of hhpack\performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,14 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\stopwatch\example;
+namespace hhpack\performance\example;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\stopwatch\result\WatchedResult;
-use hhpack\stopwatch\PerformanceWatcher;
-use hhpack\stopwatch\TimeWatcher;
-use hhpack\stopwatch\MemoryWatcher;
+use hhpack\performance\result\WatchedResult;
+use hhpack\performance\PerformanceWatcher;
+use hhpack\performance\TimeWatcher;
+use hhpack\performance\MemoryWatcher;
 
 $watcher = PerformanceWatcher::fromItems([
   Pair { 'time', new TimeWatcher() },

@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\stopwatch.
+ * This file is part of hhpack\performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\stopwatch\result;
+namespace hhpack\performance\result;
 
-use hhpack\stopwatch\Range;
+use hhpack\performance\Range;
 
 final class WatchedResult<T as num> implements Range<T>
 {

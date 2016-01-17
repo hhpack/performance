@@ -1,8 +1,8 @@
 <?hh //partial
 
-namespace hhpack\stopwatch\spec;
+namespace hhpack\performance\spec;
 
-use hhpack\stopwatch\TimeWatcher;
+use hhpack\performance\TimeWatcher;
 
 describe(TimeWatcher::class, function() {
   describe('->stop()', function() {
