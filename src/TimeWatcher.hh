@@ -19,9 +19,7 @@ final class TimeWatcher implements Watcher<WatchedResult<float>>
     private float $startedAt;
     private WatchedResult<float> $processingTime;
 
-    public function __construct(
-        private string $name
-    )
+    public function __construct()
     {
         $this->startedAt = (float) microtime(true);
         $this->processingTime = new WatchedResult(0.0, 0.0);
