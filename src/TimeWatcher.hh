@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\stopwatch.
+ * This file is part of hhpack\performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,20 +9,20 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\stopwatch;
+namespace hhpack\performance;
 
-use hhpack\stopwatch\result\MicrotimeResult;
+use hhpack\performance\result\WatchedResult;
 
-final class ProcessingTimeWatcher implements Watcher<MicrotimeResult>
+final class TimeWatcher implements Watcher<WatchedResult<float>>
 {
 
     private float $startedAt;
-    private MicrotimeResult $processingTime;
+    private WatchedResult<float> $processingTime;
 
     public function __construct()
     {
         $this->startedAt = (float) microtime(true);
-        $this->processingTime = new MicrotimeResult();
+        $this->processingTime = new WatchedResult(0.0, 0.0);
     }
 
     public function start() : void
@@ -35,10 +35,10 @@ final class ProcessingTimeWatcher implements Watcher<MicrotimeResult>
         $stoppedAt = (float) microtime(true);
 
         $result = Pair { $this->startedAt, $stoppedAt };
-        $this->processingTime = MicrotimeResult::createFrom($result);
+        $this->processingTime = WatchedResult::of($result);
     }
 
-    public function getResult() : MicrotimeResult
+    public function result() : WatchedResult<float>
     {
         return $this->processingTime;
     }

@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\stopwatch.
+ * This file is part of hhpack\performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\stopwatch;
+namespace hhpack\performance;
 
-interface Range<Ti, To>
+interface Range<T>
 {
-    public function getStartedValue() : Ti;
-    public function getStoppedValue() : Ti;
-    public function diff() : To;
-    public static function createFrom(Pair<Ti, Ti> $range) : this;
+    public function first() : T;
+    public function last() : T;
+    public function diff() : T;
+    public static function of(Pair<T, T> $range) : this;
 }
