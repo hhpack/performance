@@ -13,11 +13,11 @@ namespace hhpack\performance;
 
 use hhpack\performance\result\WatchedResult;
 
-final class TimeWatcher implements Watcher<WatchedResult<float>>
+final class TimeWatcher implements Watcher<WatchedResult<num>>
 {
 
     private float $startedAt;
-    private WatchedResult<float> $processingTime;
+    private WatchedResult<num> $processingTime;
 
     public function __construct()
     {
@@ -38,7 +38,7 @@ final class TimeWatcher implements Watcher<WatchedResult<float>>
         $this->processingTime = WatchedResult::of($result);
     }
 
-    public function result() : WatchedResult<float>
+    public function result() : WatchedResult<num>
     {
         return $this->processingTime;
     }

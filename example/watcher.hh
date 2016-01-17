@@ -18,19 +18,24 @@ use hhpack\performance\PerformanceWatcher;
 use hhpack\performance\TimeWatcher;
 use hhpack\performance\MemoryWatcher;
 
-$watcher = PerformanceWatcher::fromItems([
-  Pair { 'time', new TimeWatcher() },
-  Pair { 'memory', new MemoryWatcher() }
-]);
+function watcher_main() :void
+{
+    $watcher = PerformanceWatcher::fromItems([
+        Pair { 'time', new TimeWatcher() },
+        Pair { 'memory', new MemoryWatcher() }
+    ]);
 
-$watcher->start();
-$watcher->stop();
+    $watcher->start();
+    $watcher->stop();
 
-$result = $watcher->result();
-$texts = $result->mapWithKey(($key, $result) ==> {
-  return sprintf("%s: %s", $key, (string) $result->diff());
-})->values();
+    $result = $watcher->result();
+    $texts = $result->mapWithKey(($key, $result) ==> {
+        return sprintf("%s: %s", $key, (string) $result->diff());
+    })->values();
 
-foreach ($texts as $text) {
-  echo $text, PHP_EOL;
+    foreach ($texts as $text) {
+        echo $text, PHP_EOL;
+    }
 }
+
+watcher_main();

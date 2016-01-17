@@ -13,11 +13,11 @@ namespace hhpack\performance;
 
 use hhpack\performance\result\WatchedResult;
 
-final class MemoryWatcher implements Watcher<WatchedResult<int>>
+final class MemoryWatcher implements Watcher<WatchedResult<num>>
 {
 
     private int $startedMemory;
-    private WatchedResult<int> $usedMemory;
+    private WatchedResult<num> $usedMemory;
 
     public function __construct()
     {
@@ -38,7 +38,7 @@ final class MemoryWatcher implements Watcher<WatchedResult<int>>
         $this->usedMemory = WatchedResult::of($result);
     }
 
-    public function result() : WatchedResult<int>
+    public function result() : WatchedResult<num>
     {
         return $this->usedMemory;
     }
