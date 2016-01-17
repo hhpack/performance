@@ -11,8 +11,6 @@
 
 namespace hhpack\performance;
 
-use hhpack\performance\result\WatchedResult;
-
 final class PerformanceWatcher implements Watcher<ImmMap<string, WatchedResult<num>>>
 {
 

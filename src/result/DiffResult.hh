@@ -11,9 +11,10 @@
 
 namespace hhpack\performance\result;
 
-use hhpack\performance\Range;
+use hhpack\performance\WatchedResult;
 
-final class WatchedResult<T as num> implements Range<T>
+<<__ConsistentConstruct>>
+abstract class DiffResult<T as num> implements WatchedResult<T>
 {
 
     public function __construct(
@@ -34,7 +35,7 @@ final class WatchedResult<T as num> implements Range<T>
     }
 
     <<__Memoize>>
-    public function diff() : T
+    public function result() : T
     {
         return $this->last - $this->first;
     }

@@ -9,9 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance;
+namespace hhpack\performance\result;
 
-interface Watcher<+T> extends Watchable
+use hhpack\performance\WatchedResult;
+
+final class UsedMemory extends DiffResult<num> implements WatchedResult<num>
 {
-    public function result() : T;
 }
