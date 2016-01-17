@@ -1,7 +1,7 @@
 {
   "name": "hhpack/performance",
   "keywords": [ "timer", "hack", "performance", "time", "memory" ],
-  "description": "performance utility library for Hack",
+  "description": "Performance utility library for Hack",
   "authors": [
     {
       "name": "Noritaka Horio",
