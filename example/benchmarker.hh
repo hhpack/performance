@@ -18,12 +18,14 @@ use hhpack\performance\TimeWatcher;
 use hhpack\performance\MemoryWatcher;
 use hhpack\performance\reporter\TextReporter;
 
-function benchmarker_main() : void
+async function benchmarker_main() : Awaitable<void>
 {
     $bechmarker = new BenchMarker(new TextReporter());
     $bechmarker->start();
-    usleep(2000);
+
+    await \HH\Asio\usleep(2000);
+
     $bechmarker->stop();
 }
 
-benchmarker_main();
+\HH\Asio\join(benchmarker_main());
