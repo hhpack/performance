@@ -11,7 +11,7 @@
 
 namespace hhpack\performance;
 
-final class PerformanceWatcher implements Watcher<ImmMap<string, WatchedResult<num>>>
+final class PerformanceWatcher implements ComplexWatcher<num>
 {
 
     private Map<string, Watcher<WatchedResult<num>>> $watchers;
