@@ -11,7 +11,7 @@
 
 namespace hhpack\performance;
 
-interface WatchedResult<T>
+interface WatchedResult<+T>
 {
     public function first() : T;
     public function last() : T;

@@ -13,6 +13,6 @@ namespace hhpack\performance\result;
 
 use hhpack\performance\WatchedResult;
 
-final class ProcessingTime extends DiffResult<num> implements WatchedResult<num>
+final class ProcessingTime extends NumberResult<float> implements WatchedResult<float>
 {
 }

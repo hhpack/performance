@@ -13,6 +13,6 @@ namespace hhpack\performance\result;
 
 use hhpack\performance\WatchedResult;
 
-final class UsedMemory extends DiffResult<num> implements WatchedResult<num>
+final class UsedMemory extends NumberResult<int> implements WatchedResult<int>
 {
 }

@@ -14,7 +14,7 @@ namespace hhpack\performance\result;
 use hhpack\performance\WatchedResult;
 
 <<__ConsistentConstruct>>
-abstract class DiffResult<T as num> implements WatchedResult<T>
+abstract class NumberResult<T as num> implements WatchedResult<T>
 {
 
     public function __construct(
