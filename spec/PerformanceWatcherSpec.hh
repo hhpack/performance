@@ -16,7 +16,7 @@ describe(PerformanceWatcher::class, function() {
     it('returns processing result', function() {
       $this->watcher->stop();
       $result = $this->watcher->result();
-      expect($result->at('time')->diff())->toBeGreaterThan(0.0);
+      expect($result->at('time')->result())->toBeGreaterThan(0.0);
     });
   });
 });

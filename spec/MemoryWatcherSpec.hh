@@ -13,7 +13,7 @@ describe(MemoryWatcher::class, function() {
     it('returns processing result', function() {
       $this->watcher->stop();
       $result = $this->watcher->result();
-      expect($result->diff())->toBeGreaterThan(0);
+      expect($result->result())->toBeGreaterThan(0);
     });
   });
 });
