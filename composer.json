@@ -20,7 +20,8 @@
   "autoload": {
     "psr-4": {
       "hhpack\\performance\\": "src/"
-    }
+    },
+    "files": [ "src/shortcut.hh" ]
   },
   "scripts": {
     "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh spec",
