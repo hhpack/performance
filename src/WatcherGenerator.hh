@@ -11,13 +11,7 @@
 
 namespace hhpack\performance;
 
-use hhpack\performance\reporter\TextReporter;
-use hhpack\performance\generator\DefaultGenerator;
-
-function benchmark() : BenchMarker
+interface WatcherGenerator<T>
 {
-    return new BenchMarker(
-        new DefaultGenerator(),
-        new TextReporter()
-    );
+    public function generate(int $count) : Iterator<Watcher<T>>;
 }

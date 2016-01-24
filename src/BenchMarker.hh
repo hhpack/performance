@@ -11,20 +11,23 @@
 
 namespace hhpack\performance;
 
+use hhpack\performance\reporter\TextReporter;
+use hhpack\performance\generator\DefaultGenerator;
+
 final class BenchMarker
 {
 
-    private PerformanceWatcher $watcher;
+    private Reporter $reporter;
+    private WatcherGenerator<ImmMap<string, WatchedResult<num>>> $generator;
 
     public function __construct(
-        private Reporter $reporter,
+        WatcherGenerator<ImmMap<string, WatchedResult<num>>> $generator = new DefaultGenerator(),
+        Reporter $reporter = new TextReporter(),
         private int $times = 1
     )
     {
-        $this->watcher = PerformanceWatcher::fromItems([
-            Pair { 'time', new TimeWatcher() },
-            Pair { 'memory', new MemoryWatcher() }
-        ]);
+        $this->reporter = $reporter;
+        $this->generator = $generator;
     }
 
     public function times(int $times) : this
@@ -36,21 +39,21 @@ final class BenchMarker
     public async function run((function():Awaitable<void>) $callback) : Awaitable<void>
     {
         foreach ($this->execute($callback) await as $value) {
-            $this->reporter->onStop( $this->watcher->result() );
+            $this->reporter->onStop( $value );
         }
     }
 
     private async function execute((function():Awaitable<void>) $callback) : AsyncIterator<ImmMap<string, WatchedResult<num>>>
     {
-        for ($i = 0; $i <= $this->times - 1; $i++) {
+        foreach ($this->generator->generate($this->times) as $watcher) {
             $action = async () ==> {
-                $this->watcher->start();
+                $watcher->start();
                 await $callback();
-                $this->watcher->stop();
-                return $this->watcher->result();
+                $watcher->stop();
+                return $watcher->result();
             };
-            $watchedResult = await $action();
-            yield $watchedResult;
+            $result = await $action();
+            yield $result;
         }
     }
 
