@@ -44,7 +44,7 @@ function sync_benchmarker() : void
     });
 }
 sync_benchmarker();
-```hack
+```
 
 or
 
@@ -59,7 +59,7 @@ async function async_benchmarker_main() : Awaitable<void>
 }
 
 \HH\Asio\join(async_benchmarker_main());
-```hack
+```
 
 ## Run the test
 
