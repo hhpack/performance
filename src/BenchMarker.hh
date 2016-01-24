@@ -17,7 +17,8 @@ final class BenchMarker
     private PerformanceWatcher $watcher;
 
     public function __construct(
-        private Reporter $reporter
+        private Reporter $reporter,
+        private int $times = 1
     )
     {
         $this->watcher = PerformanceWatcher::fromItems([
@@ -26,15 +27,31 @@ final class BenchMarker
         ]);
     }
 
-    public function start() : void
+    public function times(int $times) : this
     {
-        $this->watcher->start();
+        $this->times = $times;
+        return $this;
     }
 
-    public function stop() : void
+    public async function run((function():Awaitable<void>) $callback) : Awaitable<void>
     {
-        $this->watcher->stop();
-        $this->reporter->onStop( $this->watcher->result() );
+        foreach ($this->execute($callback) await as $value) {
+            $this->reporter->onStop( $this->watcher->result() );
+        }
+    }
+
+    private async function execute((function():Awaitable<void>) $callback) : AsyncIterator<ImmMap<string, WatchedResult<num>>>
+    {
+        for ($i = 0; $i <= $this->times - 1; $i++) {
+            $action = async () ==> {
+                $this->watcher->start();
+                await $callback();
+                $this->watcher->stop();
+                return $this->watcher->result();
+            };
+            $watchedResult = await $action();
+            yield $watchedResult;
+        }
     }
 
 }

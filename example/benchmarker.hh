@@ -21,7 +21,7 @@ use hhpack\performance\reporter\TextReporter;
 
 async function benchmarker_main() : Awaitable<void>
 {
-    await bench\benchmark(async () ==> {
+    await bench\benchmark()->times(10)->run(async () ==> {
         await \HH\Asio\usleep(2000);
     });
 }

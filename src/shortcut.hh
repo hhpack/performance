@@ -13,12 +13,7 @@ namespace hhpack\performance;
 
 use hhpack\performance\reporter\TextReporter;
 
-async function benchmark((function():Awaitable<void>) $callback) : Awaitable<void>
+function benchmark() : BenchMarker
 {
-    $bechmarker = new BenchMarker(new TextReporter());
-    $bechmarker->start();
-
-    await $callback();
-
-    $bechmarker->stop();
+    return new BenchMarker(new TextReporter());
 }
