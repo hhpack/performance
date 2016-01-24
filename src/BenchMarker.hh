@@ -17,12 +17,12 @@ use hhpack\performance\generator\DefaultGenerator;
 final class BenchMarker
 {
 
-    private Reporter $reporter;
+    private ResultReporter $reporter;
     private WatcherGenerator<ImmMap<string, WatchedResult<num>>> $generator;
 
     public function __construct(
         WatcherGenerator<ImmMap<string, WatchedResult<num>>> $generator = new DefaultGenerator(),
-        Reporter $reporter = new TextReporter(),
+        ResultReporter $reporter = new TextReporter(),
         private int $times = 1
     )
     {

@@ -11,10 +11,10 @@
 
 namespace hhpack\performance\reporter;
 
-use hhpack\performance\Reporter;
 use hhpack\performance\WatchedResult;
+use hhpack\performance\ResultReporter;
 
-final class TextReporter implements Reporter
+final class TextReporter implements ResultReporter
 {
 
     public function onStop(ImmMap<string, WatchedResult<num>> $result) : void

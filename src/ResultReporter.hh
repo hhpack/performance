@@ -11,7 +11,7 @@
 
 namespace hhpack\performance;
 
-interface Reporter
+interface ResultReporter
 {
     public function onStop(ImmMap<string, WatchedResult<num>> $result) : void;
 }
