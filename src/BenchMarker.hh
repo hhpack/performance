@@ -13,15 +13,16 @@ namespace hhpack\performance;
 
 use hhpack\performance\reporter\TextReporter;
 use hhpack\performance\generator\DefaultGenerator;
+use hhpack\performance\result\ComplexResult;
 
 final class BenchMarker
 {
 
     private ResultReporter $reporter;
-    private WatcherGenerator<ImmMap<string, WatchedResult<num>>> $generator;
+    private WatcherGenerator<ComplexResult> $generator;
 
     public function __construct(
-        WatcherGenerator<ImmMap<string, WatchedResult<num>>> $generator = new DefaultGenerator(),
+        WatcherGenerator<ComplexResult> $generator = new DefaultGenerator(),
         ResultReporter $reporter = new TextReporter(),
         private int $times = 1
     )
@@ -43,7 +44,7 @@ final class BenchMarker
         }
     }
 
-    private async function execute((function():Awaitable<void>) $callback) : AsyncIterator<ImmMap<string, WatchedResult<num>>>
+    private async function execute((function():Awaitable<void>) $callback) : AsyncIterator<ComplexResult>
     {
         foreach ($this->generator->generate($this->times) as $watcher) {
             $action = async () ==> {

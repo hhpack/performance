@@ -13,11 +13,12 @@ namespace hhpack\performance\reporter;
 
 use hhpack\performance\WatchedResult;
 use hhpack\performance\ResultReporter;
+use hhpack\performance\result\ComplexResult;
 
 final class TextReporter implements ResultReporter
 {
 
-    public function onStop(ImmMap<string, WatchedResult<num>> $result) : void
+    public function onStop(ComplexResult $result) : void
     {
         $texts = $result->mapWithKey(($key, $result) ==> {
             return sprintf("%s: %s", $key, (string) $result->result());

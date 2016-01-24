@@ -11,7 +11,9 @@
 
 namespace hhpack\performance;
 
+use hhpack\performance\result\ComplexResult;
+
 interface ResultReporter
 {
-    public function onStop(ImmMap<string, WatchedResult<num>> $result) : void;
+    public function onStop(ComplexResult $result) : void;
 }

@@ -11,7 +11,9 @@
 
 namespace hhpack\performance;
 
-interface ComplexWatcher<T> extends Watcher<ImmMap<string, WatchedResult<T>>>
+use hhpack\performance\result\ComplexResult;
+
+interface ComplexWatcher<T> extends Watcher<ComplexResult>
 {
     public static function fromItems(Traversable<Pair<string, Watcher<WatchedResult<T>>>> $watchers) : this;
 }

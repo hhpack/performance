@@ -17,12 +17,12 @@ use hhpack\performance\WatcherGenerator;
 use hhpack\performance\PerformanceWatcher;
 use hhpack\performance\TimeWatcher;
 use hhpack\performance\MemoryWatcher;
+use hhpack\performance\result\ComplexResult;
 
-
-final class DefaultGenerator implements WatcherGenerator<ImmMap<string, WatchedResult<num>>>
+final class DefaultGenerator implements WatcherGenerator<ComplexResult>
 {
 
-    public function generate(int $count) : Iterator<Watcher<ImmMap<string, WatchedResult<num>>>>
+    public function generate(int $count) : Iterator<Watcher<ComplexResult>>
     {
         $generator = () ==> {
             for ($i = 0; $i <= $count - 1; $i++) {

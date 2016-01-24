@@ -11,6 +11,8 @@
 
 namespace hhpack\performance;
 
+use hhpack\performance\result\ComplexResult;
+
 final class PerformanceWatcher implements ComplexWatcher<num>
 {
 
@@ -43,10 +45,12 @@ final class PerformanceWatcher implements ComplexWatcher<num>
         }
     }
 
-    public function result() : ImmMap<string, WatchedResult<num>>
+    public function result() : ComplexResult
     {
-        return $this->watchers->map(($watcher) ==> $watcher->result())
+        $result = $this->watchers->map(($watcher) ==> $watcher->result())
             ->toImmMap();
+
+        return new ComplexResult($result);
     }
 
     public static function fromItems(Traversable<Pair<string, Watcher<WatchedResult<num>>>> $watchers) : this

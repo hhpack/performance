@@ -14,24 +14,20 @@ namespace hhpack\performance\result;
 use hhpack\performance\WatchedResult;
 use ConstMapAccess;
 
-final class ComplexResult implements WatchedResult<ImmMap<string, num>>, ConstMapAccess<string, num>
+final class ComplexResult implements WatchedResult<ImmMap<string, num>>, ConstMapAccess<string, WatchedResult<num>>
 {
 
-    private ImmMap<string, num> $result;
     private ImmMap<string, WatchedResult<num>> $watchedResult;
 
     public function __construct(
         KeyedTraversable<string, WatchedResult<num>> $results = []
     )
     {
-        $result = Map {};
         $watchedResult = Map {};
 
         foreach ($results as $key => $value) {
-            $result->set($key, $value->result());
             $watchedResult->set($key, $value);
         }
-        $this->result = $result->toImmMap();
         $this->watchedResult = $watchedResult->toImmMap();
     }
 
@@ -53,34 +49,34 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>>, ConstMa
         return $this->toImmMap();
     }
 
-    public function mapWithKey<Tu>((function(string,num):Tu) $mapper) : ImmMap<string, Tu>
+    public function mapWithKey<Tu>((function(string,WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
     {
-        return $this->result->mapWithKey($mapper);
+        return $this->watchedResult->mapWithKey($mapper);
     }
 
     public function contains<Tu super string>(Tu $m) : bool
     {
-        return $this->result->contains($m);
+        return $this->watchedResult->contains($m);
     }
 
-    public function at(string $k) : num
+    public function at(string $k) : WatchedResult<num>
     {
-        return $this->result->at($k);
+        return $this->watchedResult->at($k);
     }
 
-    public function get(string $k) : ?num
+    public function get(string $k) : ?WatchedResult<num>
     {
-        return $this->result->get($k);
+        return $this->watchedResult->get($k);
     }
 
     public function containsKey<Tu super string>(Tu $k): bool 
     {
-        return $this->result->containsKey($k);
+        return $this->watchedResult->containsKey($k);
     }
 
     public function toImmMap() : ImmMap<string, num>
     {
-        return $this->result->toImmMap();
+        return $this->watchedResult->map(($result) ==> $result->result());
     }
 
 }
