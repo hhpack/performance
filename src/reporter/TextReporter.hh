@@ -21,7 +21,7 @@ final class TextReporter implements ResultReporter
     public function onStop(ComplexResult $result) : void
     {
         $texts = $result->mapWithKey(($key, $result) ==> {
-            return sprintf("%s: %s", $key, (string) $result->result());
+            return sprintf("%s: %s", $key, (string) $result->value());
         })->values()->toArray();
 
         fwrite(STDOUT, implode(' / ', $texts) . PHP_EOL);

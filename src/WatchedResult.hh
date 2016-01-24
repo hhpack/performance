@@ -15,5 +15,5 @@ interface WatchedResult<+T>
 {
     public function first() : T;
     public function last() : T;
-    public function result() : T;
+    public function value() : T;
 }

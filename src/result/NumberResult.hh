@@ -35,7 +35,7 @@ abstract class NumberResult<T as num> implements WatchedResult<T>
     }
 
     <<__Memoize>>
-    public function result() : T
+    public function value() : T
     {
         return $this->last - $this->first;
     }

@@ -44,7 +44,7 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>>, ConstMa
     }
 
     <<__Memoize>>
-    public function result() : ImmMap<string, num>
+    public function value() : ImmMap<string, num>
     {
         return $this->toImmMap();
     }
@@ -76,7 +76,7 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>>, ConstMa
 
     public function toImmMap() : ImmMap<string, num>
     {
-        return $this->watchedResult->map(($result) ==> $result->result());
+        return $this->watchedResult->map(($result) ==> $result->value());
     }
 
 }

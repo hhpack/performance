@@ -29,7 +29,7 @@ function watcher_main() :void
 
     $result = $watcher->result();
     $texts = $result->mapWithKey(($key, $result) ==> {
-        return sprintf("%s: %s", $key, (string) $result->result());
+        return sprintf("%s: %s", $key, (string) $result->value());
     })->values();
 
     foreach ($texts as $text) {
