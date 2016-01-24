@@ -12,9 +12,14 @@
 namespace hhpack\performance\result;
 
 use hhpack\performance\WatchedResult;
-use ConstMapAccess;
 
-final class ComplexResult implements WatchedResult<ImmMap<string, num>>, ConstMapAccess<string, WatchedResult<num>>
+// Do not use because the error occurs at runtime.
+//
+// see https://github.com/hhvm/user-documentation/issues/261
+//     https://github.com/facebook/hhvm/issues/6758
+// use ConstMapAccess;
+
+final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, ConstMapAccess<string, WatchedResult<num>>
 {
 
     private ImmMap<string, WatchedResult<num>> $watchedResult;
