@@ -14,9 +14,17 @@ namespace hhpack\performance;
 use hhpack\performance\reporter\TextReporter;
 use hhpack\performance\generator\DefaultGenerator;
 
-function benchmark() : BenchMarker
+function async() : AsyncBenchmarker
 {
-    return new BenchMarker(
+    return new AsyncBenchmarker(
+        new DefaultGenerator(),
+        new TextReporter()
+    );
+}
+
+function sync() : Benchmarker
+{
+    return new Benchmarker(
         new DefaultGenerator(),
         new TextReporter()
     );
