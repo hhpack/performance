@@ -11,18 +11,18 @@
 
 namespace hhpack\performance;
 
-use hhpack\performance\result\WatchedResult;
+use hhpack\performance\result\ProcessingTime;
 
-final class TimeWatcher implements Watcher<WatchedResult<num>>
+final class TimeWatcher implements Watcher<ProcessingTime>
 {
 
     private float $startedAt;
-    private WatchedResult<num> $processingTime;
+    private ProcessingTime $processingTime;
 
     public function __construct()
     {
         $this->startedAt = (float) microtime(true);
-        $this->processingTime = new WatchedResult(0.0, 0.0);
+        $this->processingTime = ProcessingTime::of(Pair { 0.0, 0.0 });
     }
 
     public function start() : void
@@ -35,10 +35,10 @@ final class TimeWatcher implements Watcher<WatchedResult<num>>
         $stoppedAt = (float) microtime(true);
 
         $result = Pair { $this->startedAt, $stoppedAt };
-        $this->processingTime = WatchedResult::of($result);
+        $this->processingTime = ProcessingTime::of($result);
     }
 
-    public function result() : WatchedResult<num>
+    public function result() : ProcessingTime
     {
         return $this->processingTime;
     }

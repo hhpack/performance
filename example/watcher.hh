@@ -13,7 +13,6 @@ namespace hhpack\performance\example;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\performance\result\WatchedResult;
 use hhpack\performance\PerformanceWatcher;
 use hhpack\performance\TimeWatcher;
 use hhpack\performance\MemoryWatcher;
@@ -30,7 +29,7 @@ function watcher_main() :void
 
     $result = $watcher->result();
     $texts = $result->mapWithKey(($key, $result) ==> {
-        return sprintf("%s: %s", $key, (string) $result->diff());
+        return sprintf("%s: %s", $key, (string) $result->value());
     })->values();
 
     foreach ($texts as $text) {

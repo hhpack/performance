@@ -11,7 +11,7 @@
 
 namespace hhpack\performance;
 
-interface Watcher<+T> extends Watchable
+interface WatcherGenerator<T>
 {
-    public function result() : T;
+    public function generate(int $count) : Iterator<Watcher<T>>;
 }

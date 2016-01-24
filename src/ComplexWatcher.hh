@@ -11,7 +11,9 @@
 
 namespace hhpack\performance;
 
-interface Watcher<+T> extends Watchable
+use hhpack\performance\result\ComplexResult;
+
+interface ComplexWatcher<T> extends Watcher<ComplexResult>
 {
-    public function result() : T;
+    public static function fromItems(Traversable<Pair<string, Watcher<WatchedResult<T>>>> $watchers) : this;
 }

@@ -11,7 +11,9 @@
 
 namespace hhpack\performance;
 
-interface Watcher<+T> extends Watchable
+use hhpack\performance\result\ComplexResult;
+
+interface ResultReporter
 {
-    public function result() : T;
+    public function onStop(ComplexResult $result) : void;
 }

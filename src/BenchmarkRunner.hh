@@ -11,7 +11,8 @@
 
 namespace hhpack\performance;
 
-interface Watcher<+T> extends Watchable
+interface BenchmarkRunner<T>
 {
-    public function result() : T;
+    public function times(int $times) : this;
+    public function run((function():T) $callback) : T;
 }

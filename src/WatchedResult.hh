@@ -11,10 +11,9 @@
 
 namespace hhpack\performance;
 
-interface Range<T>
+interface WatchedResult<+T>
 {
     public function first() : T;
     public function last() : T;
-    public function diff() : T;
-    public static function of(Pair<T, T> $range) : this;
+    public function value() : T;
 }
