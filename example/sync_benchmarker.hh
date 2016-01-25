@@ -11,7 +11,7 @@
 
 namespace hhpack\performance\example;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/hh_autoload.php';
 
 use hhpack\performance as bench;
 
