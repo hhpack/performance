@@ -14,5 +14,6 @@ namespace hhpack\performance;
 interface BenchmarkRunner<T>
 {
     public function times(int $times) : this;
+    public function reporter(ResultReporter $reporter) : this;
     public function run((function():T) $callback) : T;
 }

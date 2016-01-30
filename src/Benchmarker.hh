@@ -37,6 +37,12 @@ final class Benchmarker implements BenchmarkRunner<void>
         return $this;
     }
 
+    public function reporter(ResultReporter $reporter) : this
+    {
+        $this->reporter = $reporter;
+        return $this;
+    }
+
     public function run((function():void) $callback) : void
     {
         foreach ($this->execute($callback) as $value) {

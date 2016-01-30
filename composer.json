@@ -24,6 +24,11 @@
     },
     "files": [ "src/shortcut.hh" ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "hhpack\\performance\\spec\\mock\\": "spec/mock/"
+    }
+  },
   "scripts": {
     "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh spec",
     "check:init": "touch .hhconfig",

@@ -37,6 +37,12 @@ final class AsyncBenchmarker implements BenchmarkRunner<Awaitable<void>>
         return $this;
     }
 
+    public function reporter(ResultReporter $reporter) : this
+    {
+        $this->reporter = $reporter;
+        return $this;
+    }
+
     public async function run((function():Awaitable<void>) $callback) : Awaitable<void>
     {
         foreach ($this->execute($callback) await as $value) {

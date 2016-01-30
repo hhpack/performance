@@ -15,7 +15,7 @@ describe(TextReporter::class, function() {
       $this->report = file_get_contents(__DIR__ . '/../fixtures/text_report.txt');
       $this->reporter = new TextReporter($this->writer);
     });
-    it('returns processing result', function() {
+    it('display benchmark result', function() {
       $this->reporter->onStop(new ComplexResult([
         'time' => ProcessingTime::of(Pair { 0, 0.003244 }),
         'memory' => UsedMemory::of(Pair { 0, 132344 })
