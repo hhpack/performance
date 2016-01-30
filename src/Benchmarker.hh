@@ -42,6 +42,7 @@ final class Benchmarker implements BenchmarkRunner<void>
         foreach ($this->execute($callback) as $value) {
             $this->reporter->onStop( $value );
         }
+        $this->reporter->onFinish();
     }
 
     private function execute((function():void) $callback) : Iterator<ComplexResult>

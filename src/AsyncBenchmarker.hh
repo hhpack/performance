@@ -42,6 +42,7 @@ final class AsyncBenchmarker implements BenchmarkRunner<Awaitable<void>>
         foreach ($this->execute($callback) await as $value) {
             $this->reporter->onStop( $value );
         }
+        $this->reporter->onFinish();
     }
 
     private async function execute((function():Awaitable<void>) $callback) : AsyncIterator<ComplexResult>

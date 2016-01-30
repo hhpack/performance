@@ -18,13 +18,38 @@ use hhpack\performance\result\ComplexResult;
 final class TextReporter implements ResultReporter
 {
 
+    private Vector<ImmMap<string, num>> $results;
+    private Map<string, int> $paddingLength;
+
+    public function __construct()
+    {
+        $this->results = Vector {};
+        $this->paddingLength = Map {};
+    }
+
     public function onStop(ComplexResult $result) : void
     {
-        $texts = $result->mapWithKey(($key, $result) ==> {
-            return sprintf("%s: %s", $key, (string) $result->value());
-        })->values()->toArray();
+        $watchedResult = $result->toImmMap();
 
-        fwrite(STDOUT, implode(' / ', $texts) . PHP_EOL);
+        foreach ($watchedResult as $key => $value) {
+            $length = strlen((string) $value);
+            $paddingLength = $this->paddingLength->get($key);
+            $paddingLength = ($paddingLength === null) ? 0 : $paddingLength;
+            $this->paddingLength->set($key, ($length > $paddingLength) ? $length : $paddingLength);
+        }
+
+        $this->results->add($watchedResult);
+    }
+
+    public function onFinish() : void
+    {
+        foreach ($this->results as $result) {
+            $columns = $result->mapWithKey(($key, $value) ==> {
+                $max = $this->paddingLength->at($key);
+                return str_pad((string) $value, $max, ' ', STR_PAD_LEFT);
+            })->values()->toArray();
+            fwrite(STDOUT, implode(', ', $columns) . PHP_EOL);
+        }
     }
 
 }

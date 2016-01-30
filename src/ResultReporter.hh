@@ -16,4 +16,5 @@ use hhpack\performance\result\ComplexResult;
 interface ResultReporter
 {
     public function onStop(ComplexResult $result) : void;
+    public function onFinish() : void;
 }
