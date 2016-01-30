@@ -11,9 +11,11 @@
 
 namespace hhpack\performance\reporter;
 
+use hhpack\performance\Writer;
 use hhpack\performance\WatchedResult;
 use hhpack\performance\ResultReporter;
 use hhpack\performance\result\ComplexResult;
+use hhpack\performance\writer\StdoutWriter;
 
 final class TextReporter implements ResultReporter
 {
@@ -21,7 +23,9 @@ final class TextReporter implements ResultReporter
     private Vector<ImmMap<string, string>> $results;
     private Map<string, int> $paddingLength;
 
-    public function __construct()
+    public function __construct(
+        private Writer<void> $writer = new StdoutWriter()
+    )
     {
         $this->results = Vector {};
         $this->paddingLength = Map {};
@@ -63,9 +67,9 @@ final class TextReporter implements ResultReporter
         $headerLength = strlen($this->header());
         $headerSeparator = str_pad('', $headerLength, '-');
 
-        echo $headerSeparator, PHP_EOL;
-        echo $this->header(), PHP_EOL;
-        echo $headerSeparator, PHP_EOL;
+        $this->writer->writeln($headerSeparator);
+        $this->writer->writeln($this->header());
+        $this->writer->writeln($headerSeparator);
     }
 
     private function writeBody() : void
@@ -75,7 +79,7 @@ final class TextReporter implements ResultReporter
                 $max = $this->paddingLength->at($key);
                 return str_pad($value, $max, ' ', STR_PAD_LEFT);
             })->values()->toArray();
-            echo '| ' . implode(' | ', $columns) . ' |' , PHP_EOL;
+            $this->writer->writeln('| ' . implode(' | ', $columns) . ' |');
         }
     }
 
@@ -83,7 +87,7 @@ final class TextReporter implements ResultReporter
     {
         $headerLength = strlen($this->header());
         $headerSeparator = str_pad('', $headerLength, '-');
-        echo str_pad('', $headerLength, '-'), PHP_EOL;
+        $this->writer->writeln(str_pad('', $headerLength, '-'));
     }
 
 }

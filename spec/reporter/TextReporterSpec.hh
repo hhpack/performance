@@ -6,12 +6,14 @@ use hhpack\performance\result\ComplexResult;
 use hhpack\performance\result\UsedMemory;
 use hhpack\performance\result\ProcessingTime;
 use hhpack\performance\reporter\TextReporter;
+use hhpack\performance\writer\BufferedWriter;
 
 describe(TextReporter::class, function() {
   describe('->onFinish()', function() {
     beforeEach(function() {
+      $this->writer = new BufferedWriter();
       $this->report = file_get_contents(__DIR__ . '/../fixtures/text_report.txt');
-      $this->reporter = new TextReporter();
+      $this->reporter = new TextReporter($this->writer);
     });
     it('returns processing result', function() {
       $this->reporter->onStop(new ComplexResult([
@@ -24,6 +26,7 @@ describe(TextReporter::class, function() {
       ]));
       expect(function () {
         $this->reporter->onFinish();
+        echo $this->writer;
       })->toPrint($this->report);
     });
   });
