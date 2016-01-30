@@ -16,4 +16,5 @@ interface WatchedResult<+T>
     public function first() : T;
     public function last() : T;
     public function value() : T;
+    public function __toString() : string;
 }

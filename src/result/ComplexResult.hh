@@ -59,6 +59,11 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
         return $this->watchedResult->mapWithKey($mapper);
     }
 
+    public function map<Tu>((function(WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
+    {
+        return $this->watchedResult->map($mapper);
+    }
+
     public function contains<Tu super string>(Tu $m) : bool
     {
         return $this->watchedResult->contains($m);
@@ -82,6 +87,12 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
     public function toImmMap() : ImmMap<string, num>
     {
         return $this->watchedResult->map(($result) ==> $result->value());
+    }
+
+    public function __toString() : string
+    {
+        $values = $this->map(($value) ==> (string) $value)->toValuesArray();
+        return implode(', ', $values);
     }
 
 }
