@@ -33,17 +33,7 @@ final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, 
     {
         return $this->number;
     }
-/*
-    public function first() : ImmMap<string, num>
-    {
-        return $this->result->first();
-    }
 
-    public function last() : ImmMap<string, num>
-    {
-        return $this->result->last();
-    }
-*/
     public function value() : ImmMap<string, num>
     {
         return $this->result->value();
