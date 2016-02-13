@@ -52,6 +52,15 @@ final class ComplexResult implements WatchedResult<ImmMap<string, WatchedResult<
         return $this->watchedResult->map($mapper);
     }
 
+    public function merge(this $result): this
+    {
+        $result = Map {};
+        $result->addAll( $this->items() );
+        $result->addAll( $result->items() );
+
+        return new static( $result->immutable()->lazy() );
+    }
+
     public function stringItems() : Iterable<Pair<string, string>>
     {
         return $this->watchedResult->map($value ==> (string) $value)->items();
