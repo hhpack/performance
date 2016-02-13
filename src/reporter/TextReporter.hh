@@ -33,10 +33,7 @@ final class TextReporter implements ResultReporter
 
     public function onStop(BenchmarkedResult $result) : void
     {
-        $orderedResult = Map { 'order' => (string) $result->orderNumber() };
-
-        $watchedResult = $result->map(($value) ==> (string) $value);
-        $watchedResult = $orderedResult->addAll( $watchedResult->items() )->toImmMap();
+        $watchedResult = $result->mapToString();
 
         foreach ($watchedResult as $key => $value) {
             $length = strlen((string) $value);

@@ -79,6 +79,14 @@ final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, 
         return $this->result->containsKey($k);
     }
 
+    public function mapToString() : ImmMap<string, string>
+    {
+        $orderedResult = Map { 'order' => $this->number };
+        $orderedResult->addAll( $this->result->items() );
+
+        return $orderedResult->toImmMap()->map($value ==> (string) $value);
+    }
+
     public function toImmMap() : ImmMap<string, num>
     {
         return $this->result->toImmMap();
