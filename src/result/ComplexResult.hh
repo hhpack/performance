@@ -84,7 +84,7 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
         return $this->watchedResult->containsKey($k);
     }
 
-    public function items(): Iterable<Pair<string, num>>
+    public function items(): Iterable<Pair<string, WatchedResult<num>>>
     {
         return $this->watchedResult->items();
     }
