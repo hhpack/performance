@@ -14,6 +14,7 @@ namespace hhpack\performance;
 use hhpack\performance\reporter\TextReporter;
 use hhpack\performance\generator\DefaultGenerator;
 use hhpack\performance\result\ComplexResult;
+use hhpack\performance\result\BenchmarkedResult;
 
 final class Benchmarker implements BenchmarkRunner<void>
 {
@@ -51,16 +52,16 @@ final class Benchmarker implements BenchmarkRunner<void>
         $this->reporter->onFinish();
     }
 
-    private function execute((function():void) $callback) : Iterator<ComplexResult>
+    private function execute((function():void) $callback) : Iterator<BenchmarkedResult>
     {
-        foreach ($this->generator->generate($this->times) as $watcher) {
+        foreach ($this->generator->generate($this->times) as $number => $watcher) {
             $action = () ==> {
                 $watcher->start();
                 $callback();
                 $watcher->stop();
                 return $watcher->result();
             };
-            yield $action();
+            yield new BenchmarkedResult($number, $action());
         }
     }
 

@@ -14,7 +14,7 @@ namespace hhpack\performance\reporter;
 use hhpack\performance\Writer;
 use hhpack\performance\WatchedResult;
 use hhpack\performance\ResultReporter;
-use hhpack\performance\result\ComplexResult;
+use hhpack\performance\result\BenchmarkedResult;
 use hhpack\performance\writer\StdoutWriter;
 
 final class TextReporter implements ResultReporter
@@ -31,7 +31,7 @@ final class TextReporter implements ResultReporter
         $this->paddingLength = Map {};
     }
 
-    public function onStop(ComplexResult $result) : void
+    public function onStop(BenchmarkedResult $result) : void
     {
         $watchedResult = $result->map(($value) ==> (string) $value);
 

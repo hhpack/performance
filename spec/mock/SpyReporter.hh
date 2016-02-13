@@ -3,7 +3,7 @@
 namespace hhpack\performance\spec\mock;
 
 use hhpack\performance\ResultReporter;
-use hhpack\performance\result\ComplexResult;
+use hhpack\performance\result\BenchmarkedResult;
 
 final class SpyReporter implements ResultReporter
 {
@@ -11,7 +11,7 @@ final class SpyReporter implements ResultReporter
     private int $stopCount = 0;
     private int $finishCount = 0;
 
-    public function onStop(ComplexResult $result) : void
+    public function onStop(BenchmarkedResult $result) : void
     {
         $this->stopCount++;
     }

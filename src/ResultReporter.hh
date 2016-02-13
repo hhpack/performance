@@ -11,10 +11,10 @@
 
 namespace hhpack\performance;
 
-use hhpack\performance\result\ComplexResult;
+use hhpack\performance\result\BenchmarkedResult;
 
 interface ResultReporter
 {
-    public function onStop(ComplexResult $result) : void;
+    public function onStop(BenchmarkedResult $result) : void;
     public function onFinish() : void;
 }

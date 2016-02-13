@@ -14,6 +14,7 @@ namespace hhpack\performance;
 use hhpack\performance\reporter\TextReporter;
 use hhpack\performance\generator\DefaultGenerator;
 use hhpack\performance\result\ComplexResult;
+use hhpack\performance\result\BenchmarkedResult;
 
 final class AsyncBenchmarker implements BenchmarkRunner<Awaitable<void>>
 {
@@ -51,9 +52,9 @@ final class AsyncBenchmarker implements BenchmarkRunner<Awaitable<void>>
         $this->reporter->onFinish();
     }
 
-    private async function execute((function():Awaitable<void>) $callback) : AsyncIterator<ComplexResult>
+    private async function execute((function():Awaitable<void>) $callback) : AsyncIterator<BenchmarkedResult>
     {
-        foreach ($this->generator->generate($this->times) as $watcher) {
+        foreach ($this->generator->generate($this->times) as $number => $watcher) {
             $action = async () ==> {
                 $watcher->start();
                 await $callback();
@@ -61,7 +62,7 @@ final class AsyncBenchmarker implements BenchmarkRunner<Awaitable<void>>
                 return $watcher->result();
             };
             $result = await $action();
-            yield $result;
+            yield new BenchmarkedResult($number, $result);
         }
     }
 
