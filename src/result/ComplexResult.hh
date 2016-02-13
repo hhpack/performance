@@ -25,15 +25,10 @@ final class ComplexResult implements WatchedResult<ImmMap<string, WatchedResult<
     private ImmMap<string, WatchedResult<num>> $watchedResult;
 
     public function __construct(
-        KeyedTraversable<string, WatchedResult<num>> $results = []
+        Traversable<Pair<string, WatchedResult<num>>> $results = []
     )
     {
-        $watchedResult = Map {};
-
-        foreach ($results as $key => $value) {
-            $watchedResult->set($key, $value);
-        }
-        $this->watchedResult = $watchedResult->toImmMap();
+        $this->watchedResult = ImmMap::fromItems($results);
     }
 
     <<__Memoize>>
@@ -52,18 +47,13 @@ final class ComplexResult implements WatchedResult<ImmMap<string, WatchedResult<
         return $this->watchedResult->map($mapper);
     }
 
-    public function merge(this $result): this
+    public function merge(this $target): this
     {
-        $result = Map {};
+        $result = Vector {};
         $result->addAll( $this->items() );
-        $result->addAll( $result->items() );
+        $result->addAll( $target->items() );
 
-        return new static( $result->immutable()->lazy() );
-    }
-
-    public function stringItems() : Iterable<Pair<string, string>>
-    {
-        return $this->watchedResult->map($value ==> (string) $value)->items();
+        return new static( $result->values() );
     }
 
     public function contains<Tu super string>(Tu $m) : bool
@@ -100,6 +90,11 @@ final class ComplexResult implements WatchedResult<ImmMap<string, WatchedResult<
     {
         $values = $this->map(($value) ==> (string) $value)->toValuesArray();
         return implode(', ', $values);
+    }
+
+    public static function fromItems(Traversable<Pair<string, WatchedResult<num>>> $results = []) : this
+    {
+        return new static($results);
     }
 
 }

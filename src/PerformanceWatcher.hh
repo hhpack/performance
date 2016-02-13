@@ -47,10 +47,10 @@ final class PerformanceWatcher implements ComplexWatcher<num>
 
     public function result() : ComplexResult
     {
-        $result = $this->watchers->map(($watcher) ==> $watcher->result())
-            ->toImmMap();
+        $collector = ($watcher) ==> $watcher->result();
+        $result = $this->watchers->map($collector)->items();
 
-        return new ComplexResult($result);
+        return ComplexResult::fromItems($result);
     }
 
     public static function fromItems(Traversable<Pair<string, Watcher<WatchedResult<num>>>> $watchers) : this

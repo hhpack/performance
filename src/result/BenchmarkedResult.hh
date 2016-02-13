@@ -22,16 +22,20 @@ use hhpack\performance\WatchedResult;
 final class BenchmarkedResult implements WatchedResult<ComplexResult> //, ConstMapAccess<string, WatchedResult<num>>
 {
 
+    private ComplexResult $result;
+
     public function __construct(
-        private int $number,
-        private ComplexResult $result
+        int $number,
+        ComplexResult $result
     )
     {
+        $base = ComplexResult::fromItems( [ Pair { 'order', OrderNumber::of($number) }  ]);
+        $this->result = $base->merge($result);
     }
 
     public function orderNumber() : int
     {
-        return $this->number;
+        return (int) $this->result->at('order')->value();
     }
 
     public function value() : ComplexResult
@@ -66,10 +70,7 @@ final class BenchmarkedResult implements WatchedResult<ComplexResult> //, ConstM
 
     public function mapToString() : ImmMap<string, string>
     {
-        $orderedResult = Map { 'order' => (string) $this->number };
-        $orderedResult->addAll( $this->result->stringItems() );
-
-        return $orderedResult->toImmMap();
+        return $this->result->map(($value) ==> (string) $value);
     }
 
     public function toImmMap() : ImmMap<string, WatchedResult<num>>
