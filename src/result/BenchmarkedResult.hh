@@ -19,7 +19,7 @@ use hhpack\performance\WatchedResult;
 //     https://github.com/facebook/hhvm/issues/6758
 // use ConstMapAccess;
 
-final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, ConstMapAccess<string, WatchedResult<num>>
+final class BenchmarkedResult implements WatchedResult<ComplexResult> //, ConstMapAccess<string, WatchedResult<num>>
 {
 
     public function __construct(
@@ -34,19 +34,14 @@ final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, 
         return $this->number;
     }
 
-    public function value() : ImmMap<string, num>
+    public function value() : ComplexResult
     {
-        return $this->result->value();
+        return $this->result;
     }
 
-    public function mapWithKey<Tu>((function(string,WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
+    public function map<Tu>((function(this):Tu) $mapper) : Tu
     {
-        return $this->result->mapWithKey($mapper);
-    }
-
-    public function map<Tu>((function(WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
-    {
-        return $this->result->map($mapper);
+        return $mapper($this);
     }
 
     public function contains<Tu super string>(Tu $m) : bool
@@ -71,13 +66,13 @@ final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, 
 
     public function mapToString() : ImmMap<string, string>
     {
-        $orderedResult = Map { 'order' => $this->number };
-        $orderedResult->addAll( $this->result->items() );
+        $orderedResult = Map { 'order' => (string) $this->number };
+        $orderedResult->addAll( $this->result->stringItems() );
 
-        return $orderedResult->toImmMap()->map($value ==> (string) $value);
+        return $orderedResult->toImmMap();
     }
 
-    public function toImmMap() : ImmMap<string, num>
+    public function toImmMap() : ImmMap<string, WatchedResult<num>>
     {
         return $this->result->toImmMap();
     }

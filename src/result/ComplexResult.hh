@@ -52,6 +52,11 @@ final class ComplexResult implements WatchedResult<ImmMap<string, WatchedResult<
         return $this->watchedResult->map($mapper);
     }
 
+    public function stringItems() : Iterable<Pair<string, string>>
+    {
+        return $this->watchedResult->map($value ==> (string) $value)->items();
+    }
+
     public function contains<Tu super string>(Tu $m) : bool
     {
         return $this->watchedResult->contains($m);
