@@ -13,24 +13,12 @@ namespace hhpack\performance\result;
 
 use hhpack\performance\WatchedResult;
 
-<<__ConsistentConstruct>>
-abstract class NumberResult<T as num> implements WatchedResult<T>
+final class OrderNumber extends NumberResult<int> implements WatchedResult<int>
 {
 
-    public function __construct(
-        private T $value
-    )
+    public function __toString() : string
     {
-    }
-
-    public function value() : T
-    {
-        return $this->value;
-    }
-
-    public static function of(T $value) : this
-    {
-        return new static($value);
+        return (string) $this->value();
     }
 
 }

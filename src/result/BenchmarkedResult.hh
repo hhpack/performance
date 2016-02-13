@@ -19,44 +19,33 @@ use hhpack\performance\WatchedResult;
 //     https://github.com/facebook/hhvm/issues/6758
 // use ConstMapAccess;
 
-final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, ConstMapAccess<string, WatchedResult<num>>
+final class BenchmarkedResult implements WatchedResult<ComplexResult> //, ConstMapAccess<string, WatchedResult<num>>
 {
 
+    private ComplexResult $result;
+
     public function __construct(
-        private int $number,
-        private ComplexResult $result
+        int $number,
+        ComplexResult $result
     )
     {
+        $base = ComplexResult::fromItems( [ Pair { 'seq', OrderNumber::of($number) }  ]);
+        $this->result = $base->merge($result);
     }
 
-    public function orderNumber() : int
+    public function sequenceNumber() : int
     {
-        return $this->number;
+        return (int) $this->result->at('seq')->value();
     }
 
-    public function first() : ImmMap<string, num>
+    public function value() : ComplexResult
     {
-        return $this->result->first();
+        return $this->result;
     }
 
-    public function last() : ImmMap<string, num>
+    public function map<Tu>((function(this):Tu) $mapper) : Tu
     {
-        return $this->result->last();
-    }
-
-    public function value() : ImmMap<string, num>
-    {
-        return $this->result->value();
-    }
-
-    public function mapWithKey<Tu>((function(string,WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
-    {
-        return $this->result->mapWithKey($mapper);
-    }
-
-    public function map<Tu>((function(WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
-    {
-        return $this->result->map($mapper);
+        return $mapper($this);
     }
 
     public function contains<Tu super string>(Tu $m) : bool
@@ -81,13 +70,10 @@ final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, 
 
     public function mapToString() : ImmMap<string, string>
     {
-        $orderedResult = Map { 'order' => $this->number };
-        $orderedResult->addAll( $this->result->items() );
-
-        return $orderedResult->toImmMap()->map($value ==> (string) $value);
+        return $this->result->map(($value) ==> (string) $value);
     }
 
-    public function toImmMap() : ImmMap<string, num>
+    public function toImmMap() : ImmMap<string, WatchedResult<num>>
     {
         return $this->result->toImmMap();
     }

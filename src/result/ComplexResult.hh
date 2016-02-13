@@ -19,37 +19,20 @@ use hhpack\performance\WatchedResult;
 //     https://github.com/facebook/hhvm/issues/6758
 // use ConstMapAccess;
 
-final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, ConstMapAccess<string, WatchedResult<num>>
+final class ComplexResult implements WatchedResult<ImmMap<string, WatchedResult<num>>> //, ConstMapAccess<string, WatchedResult<num>>
 {
 
     private ImmMap<string, WatchedResult<num>> $watchedResult;
 
     public function __construct(
-        KeyedTraversable<string, WatchedResult<num>> $results = []
+        Traversable<Pair<string, WatchedResult<num>>> $results = []
     )
     {
-        $watchedResult = Map {};
-
-        foreach ($results as $key => $value) {
-            $watchedResult->set($key, $value);
-        }
-        $this->watchedResult = $watchedResult->toImmMap();
+        $this->watchedResult = ImmMap::fromItems($results);
     }
 
     <<__Memoize>>
-    public function first() : ImmMap<string, num>
-    {
-        return $this->watchedResult->map(($result) ==> $result->first());
-    }
-
-    <<__Memoize>>
-    public function last() : ImmMap<string, num>
-    {
-        return $this->watchedResult->map(($result) ==> $result->last());
-    }
-
-    <<__Memoize>>
-    public function value() : ImmMap<string, num>
+    public function value() : ImmMap<string, WatchedResult<num>>
     {
         return $this->toImmMap();
     }
@@ -62,6 +45,15 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
     public function map<Tu>((function(WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
     {
         return $this->watchedResult->map($mapper);
+    }
+
+    public function merge(this $target): this
+    {
+        $result = Vector {};
+        $result->addAll( $this->items() );
+        $result->addAll( $target->items() );
+
+        return new static( $result->values() );
     }
 
     public function contains<Tu super string>(Tu $m) : bool
@@ -89,15 +81,20 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
         return $this->watchedResult->items();
     }
 
-    public function toImmMap() : ImmMap<string, num>
+    public function toImmMap() : ImmMap<string, WatchedResult<num>>
     {
-        return $this->watchedResult->map(($result) ==> $result->value());
+        return $this->watchedResult;
     }
 
     public function __toString() : string
     {
         $values = $this->map(($value) ==> (string) $value)->toValuesArray();
         return implode(', ', $values);
+    }
+
+    public static function fromItems(Traversable<Pair<string, WatchedResult<num>>> $results = []) : this
+    {
+        return new static($results);
     }
 
 }

@@ -22,7 +22,7 @@ final class MemoryWatcher implements Watcher<UsedMemory>
     public function __construct()
     {
         $this->startedMemory = (int) memory_get_usage(true);
-        $this->usedMemory = UsedMemory::of(Pair { 0, 0 });
+        $this->usedMemory = UsedMemory::of(0);
     }
 
     public function start() : void
@@ -34,7 +34,7 @@ final class MemoryWatcher implements Watcher<UsedMemory>
     {
         $stoppedMemory = (int) memory_get_usage(true);
 
-        $result = Pair { $this->startedMemory, $stoppedMemory };
+        $result = $stoppedMemory - $this->startedMemory;
         $this->usedMemory = UsedMemory::of($result);
     }
 

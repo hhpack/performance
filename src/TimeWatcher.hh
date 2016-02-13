@@ -22,7 +22,7 @@ final class TimeWatcher implements Watcher<ProcessingTime>
     public function __construct()
     {
         $this->startedAt = (float) microtime(true);
-        $this->processingTime = ProcessingTime::of(Pair { 0.0, 0.0 });
+        $this->processingTime = ProcessingTime::of(0.0);
     }
 
     public function start() : void
@@ -34,7 +34,7 @@ final class TimeWatcher implements Watcher<ProcessingTime>
     {
         $stoppedAt = (float) microtime(true);
 
-        $result = Pair { $this->startedAt, $stoppedAt };
+        $result = $stoppedAt - $this->startedAt;
         $this->processingTime = ProcessingTime::of($result);
     }
 

@@ -17,14 +17,13 @@ describe(TextReporter::class, function() {
       $this->reporter = new TextReporter($this->writer);
     });
     it('display benchmark result', function() {
-
       $this->reporter->onStop(new BenchmarkedResult(1, new ComplexResult([
-        'time' => ProcessingTime::of(Pair { 0, 0.003244 }),
-        'memory' => UsedMemory::of(Pair { 0, 132344 })
+        Pair { 'time', ProcessingTime::of( 0.003244 ) },
+        Pair { 'memory', UsedMemory::of( 132344 ) }
       ])));
       $this->reporter->onStop(new BenchmarkedResult(2, new ComplexResult([
-        'time' => ProcessingTime::of(Pair { 0, 0.00324 }),
-        'memory' => UsedMemory::of(Pair { 0, 13244 })
+        Pair { 'time', ProcessingTime::of( 0.00324 ) },
+        Pair { 'memory', UsedMemory::of( 13244 ) }
       ])));
       expect(function () {
         $this->reporter->onFinish();
