@@ -22,14 +22,15 @@ use hhpack\performance\result\ComplexResult;
 final class DefaultGenerator implements WatcherGenerator<ComplexResult>
 {
 
-    public function generate(int $count) : Iterator<Watcher<ComplexResult>>
+    public function generate(int $count) : KeyedIterator<int, Watcher<ComplexResult>>
     {
         $generator = () ==> {
             for ($i = 0; $i <= $count - 1; $i++) {
-                yield PerformanceWatcher::fromItems([
+                $watcher = PerformanceWatcher::fromItems([
                     Pair { 'time', new TimeWatcher() },
                     Pair { 'memory', new MemoryWatcher() }
                 ]);
+                yield ($i + 1) => $watcher;
             }
         };
         return $generator();

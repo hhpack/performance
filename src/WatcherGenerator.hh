@@ -13,5 +13,5 @@ namespace hhpack\performance;
 
 interface WatcherGenerator<T>
 {
-    public function generate(int $count) : Iterator<Watcher<T>>;
+    public function generate(int $count) : KeyedIterator<int, Watcher<T>>;
 }

@@ -19,85 +19,82 @@ use hhpack\performance\WatchedResult;
 //     https://github.com/facebook/hhvm/issues/6758
 // use ConstMapAccess;
 
-final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, ConstMapAccess<string, WatchedResult<num>>
+final class BenchmarkedResult implements WatchedResult<ImmMap<string, num>> //, ConstMapAccess<string, WatchedResult<num>>
 {
 
-    private ImmMap<string, WatchedResult<num>> $watchedResult;
-
     public function __construct(
-        KeyedTraversable<string, WatchedResult<num>> $results = []
+        private int $number,
+        private ComplexResult $result
     )
     {
-        $watchedResult = Map {};
-
-        foreach ($results as $key => $value) {
-            $watchedResult->set($key, $value);
-        }
-        $this->watchedResult = $watchedResult->toImmMap();
     }
 
-    <<__Memoize>>
+    public function orderNumber() : int
+    {
+        return $this->number;
+    }
+
     public function first() : ImmMap<string, num>
     {
-        return $this->watchedResult->map(($result) ==> $result->first());
+        return $this->result->first();
     }
 
-    <<__Memoize>>
     public function last() : ImmMap<string, num>
     {
-        return $this->watchedResult->map(($result) ==> $result->last());
+        return $this->result->last();
     }
 
-    <<__Memoize>>
     public function value() : ImmMap<string, num>
     {
-        return $this->toImmMap();
+        return $this->result->value();
     }
 
     public function mapWithKey<Tu>((function(string,WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
     {
-        return $this->watchedResult->mapWithKey($mapper);
+        return $this->result->mapWithKey($mapper);
     }
 
     public function map<Tu>((function(WatchedResult<num>):Tu) $mapper) : ImmMap<string, Tu>
     {
-        return $this->watchedResult->map($mapper);
+        return $this->result->map($mapper);
     }
 
     public function contains<Tu super string>(Tu $m) : bool
     {
-        return $this->watchedResult->contains($m);
+        return $this->result->contains($m);
     }
 
     public function at(string $k) : WatchedResult<num>
     {
-        return $this->watchedResult->at($k);
+        return $this->result->at($k);
     }
 
     public function get(string $k) : ?WatchedResult<num>
     {
-        return $this->watchedResult->get($k);
+        return $this->result->get($k);
     }
 
     public function containsKey<Tu super string>(Tu $k): bool 
     {
-        return $this->watchedResult->containsKey($k);
+        return $this->result->containsKey($k);
     }
 
-    public function items(): Iterable<Pair<string, num>>
+    public function mapToString() : ImmMap<string, string>
     {
-        return $this->value()->items();
+        $orderedResult = Map { 'order' => $this->number };
+        $orderedResult->addAll( $this->result->items() );
+
+        return $orderedResult->toImmMap()->map($value ==> (string) $value);
     }
 
     public function toImmMap() : ImmMap<string, num>
     {
-        return $this->watchedResult->map(($result) ==> $result->value());
+        return $this->result->toImmMap();
     }
 
     public function __toString() : string
     {
-        $values = $this->map(($value) ==> (string) $value)->toValuesArray();
-        return implode(', ', $values);
+        return $this->result->__toString();
     }
 
 }

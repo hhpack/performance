@@ -14,7 +14,7 @@ namespace hhpack\performance\reporter;
 use hhpack\performance\Writer;
 use hhpack\performance\WatchedResult;
 use hhpack\performance\ResultReporter;
-use hhpack\performance\result\ComplexResult;
+use hhpack\performance\result\BenchmarkedResult;
 use hhpack\performance\writer\StdoutWriter;
 
 final class TextReporter implements ResultReporter
@@ -31,9 +31,9 @@ final class TextReporter implements ResultReporter
         $this->paddingLength = Map {};
     }
 
-    public function onStop(ComplexResult $result) : void
+    public function onStop(BenchmarkedResult $result) : void
     {
-        $watchedResult = $result->map(($value) ==> (string) $value);
+        $watchedResult = $result->mapToString();
 
         foreach ($watchedResult as $key => $value) {
             $length = strlen((string) $value);
@@ -55,6 +55,10 @@ final class TextReporter implements ResultReporter
     <<__Memoize>>
     private function header() : string
     {
+        $this->paddingLength = $this->paddingLength->mapWithKey(($key, $value) ==> {
+            return strlen($key) <= $value ? $value : strlen($key);
+        });
+
         $columns = $this->paddingLength->mapWithKey(($key, $value) ==> {
             return str_pad($key, $value, ' ', STR_PAD_RIGHT);
         })->values()->toArray();
