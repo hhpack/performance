@@ -29,13 +29,13 @@ final class BenchmarkedResult implements WatchedResult<ComplexResult> //, ConstM
         ComplexResult $result
     )
     {
-        $base = ComplexResult::fromItems( [ Pair { 'order', OrderNumber::of($number) }  ]);
+        $base = ComplexResult::fromItems( [ Pair { 'seq', OrderNumber::of($number) }  ]);
         $this->result = $base->merge($result);
     }
 
-    public function orderNumber() : int
+    public function sequenceNumber() : int
     {
-        return (int) $this->result->at('order')->value();
+        return (int) $this->result->at('seq')->value();
     }
 
     public function value() : ComplexResult
