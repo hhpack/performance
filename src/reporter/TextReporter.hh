@@ -33,7 +33,10 @@ final class TextReporter implements ResultReporter
 
     public function onStop(BenchmarkedResult $result) : void
     {
+        $orderedResult = Map { 'order' => (string) $result->orderNumber() };
+
         $watchedResult = $result->map(($value) ==> (string) $value);
+        $watchedResult = $orderedResult->addAll( $watchedResult->items() )->toImmMap();
 
         foreach ($watchedResult as $key => $value) {
             $length = strlen((string) $value);
@@ -55,6 +58,10 @@ final class TextReporter implements ResultReporter
     <<__Memoize>>
     private function header() : string
     {
+        $this->paddingLength = $this->paddingLength->mapWithKey(($key, $value) ==> {
+            return strlen($key) <= $value ? $value : strlen($key);
+        });
+
         $columns = $this->paddingLength->mapWithKey(($key, $value) ==> {
             return str_pad($key, $value, ' ', STR_PAD_RIGHT);
         })->values()->toArray();
