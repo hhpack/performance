@@ -5,6 +5,8 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/569b4a0fed08610040000043/badge.svg?style=flat)](https://www.versioneye.com/user/projects/569b4a0fed08610040000043)
 [![License](https://poser.pugx.org/hhpack/performance/license)](https://packagist.org/packages/hhpack/performance)
 
+![Screen Shot](https://raw.githubusercontent.com/hhpack/performance/master/screen-shot.png)
+
 ## Basic usage
 
 You can measure the time of easy processing.
