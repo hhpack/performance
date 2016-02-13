@@ -36,17 +36,17 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
         $this->watchedResult = $watchedResult->toImmMap();
     }
 
-    <<__Memoize>>
-    public function first() : ImmMap<string, num>
-    {
-        return $this->watchedResult->map(($result) ==> $result->first());
-    }
+//    <<__Memoize>>
+//    public function first() : ImmMap<string, num>
+//    {
+//        return $this->watchedResult->map(($result) ==> $result->first());
+//    }
 
-    <<__Memoize>>
-    public function last() : ImmMap<string, num>
-    {
-        return $this->watchedResult->map(($result) ==> $result->last());
-    }
+//    <<__Memoize>>
+//    public function last() : ImmMap<string, num>
+//    {
+//        return $this->watchedResult->map(($result) ==> $result->last());
+//    }
 
     <<__Memoize>>
     public function value() : ImmMap<string, num>

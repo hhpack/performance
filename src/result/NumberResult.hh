@@ -18,32 +18,19 @@ abstract class NumberResult<T as num> implements WatchedResult<T>
 {
 
     public function __construct(
-        private T $first,
-        private T $last
+        private T $value
     )
     {
     }
 
-    public function first() : T
-    {
-        return $this->first;
-    }
-
-    public function last() : T
-    {
-        return $this->last;
-    }
-
-    <<__Memoize>>
     public function value() : T
     {
-        return $this->last - $this->first;
+        return $this->value;
     }
 
-    public static function of(Pair<T, T> $range) : this
+    public static function of(T $value) : this
     {
-        list($first, $last) = $range;
-        return new static($first, $last);
+        return new static($value);
     }
 
 }
