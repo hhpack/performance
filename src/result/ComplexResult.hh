@@ -19,7 +19,7 @@ use hhpack\performance\WatchedResult;
 //     https://github.com/facebook/hhvm/issues/6758
 // use ConstMapAccess;
 
-final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, ConstMapAccess<string, WatchedResult<num>>
+final class ComplexResult implements WatchedResult<ImmMap<string, WatchedResult<num>>> //, ConstMapAccess<string, WatchedResult<num>>
 {
 
     private ImmMap<string, WatchedResult<num>> $watchedResult;
@@ -37,7 +37,7 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
     }
 
     <<__Memoize>>
-    public function value() : ImmMap<string, num>
+    public function value() : ImmMap<string, WatchedResult<num>>
     {
         return $this->toImmMap();
     }
@@ -77,9 +77,9 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
         return $this->watchedResult->items();
     }
 
-    public function toImmMap() : ImmMap<string, num>
+    public function toImmMap() : ImmMap<string, WatchedResult<num>>
     {
-        return $this->watchedResult->map(($result) ==> $result->value());
+        return $this->watchedResult;
     }
 
     public function __toString() : string
