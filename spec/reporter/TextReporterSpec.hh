@@ -3,6 +3,7 @@
 namespace hhpack\performance\spec\reporter;
 
 use hhpack\performance\result\ComplexResult;
+use hhpack\performance\result\BenchmarkedResult;
 use hhpack\performance\result\UsedMemory;
 use hhpack\performance\result\ProcessingTime;
 use hhpack\performance\reporter\TextReporter;
@@ -16,14 +17,15 @@ describe(TextReporter::class, function() {
       $this->reporter = new TextReporter($this->writer);
     });
     it('display benchmark result', function() {
-      $this->reporter->onStop(new ComplexResult([
+
+      $this->reporter->onStop(new BenchmarkedResult(1, new ComplexResult([
         'time' => ProcessingTime::of(Pair { 0, 0.003244 }),
         'memory' => UsedMemory::of(Pair { 0, 132344 })
-      ]));
-      $this->reporter->onStop(new ComplexResult([
+      ])));
+      $this->reporter->onStop(new BenchmarkedResult(2, new ComplexResult([
         'time' => ProcessingTime::of(Pair { 0, 0.00324 }),
         'memory' => UsedMemory::of(Pair { 0, 13244 })
-      ]));
+      ])));
       expect(function () {
         $this->reporter->onFinish();
         echo $this->writer;

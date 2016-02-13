@@ -86,7 +86,7 @@ final class ComplexResult implements WatchedResult<ImmMap<string, num>> //, Cons
 
     public function items(): Iterable<Pair<string, num>>
     {
-        return $this->value()->items();
+        return $this->watchedResult->items();
     }
 
     public function toImmMap() : ImmMap<string, num>
