@@ -1,7 +1,7 @@
 <?hh //partial
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance\example;
+namespace HHPack\Performance\Example;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\performance as bench;
+use HHPack\Performance as bench;
 
 async function async_benchmarker_main() : Awaitable<void>
 {

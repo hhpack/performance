@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance\reporter;
+namespace HHPack\Performance\Reporter;
 
-use hhpack\performance\Writer;
-use hhpack\performance\WatchedResult;
-use hhpack\performance\ResultReporter;
-use hhpack\performance\result\BenchmarkedResult;
-use hhpack\performance\writer\StdoutWriter;
+use HHPack\Performance\Writer;
+use HHPack\Performance\WatchedResult;
+use HHPack\Performance\ResultReporter;
+use HHPack\Performance\Result\BenchmarkedResult;
+use HHPack\Performance\Writer\StdoutWriter;
 
 final class TextReporter implements ResultReporter
 {

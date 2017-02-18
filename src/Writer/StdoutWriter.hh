@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance\writer;
+namespace HHPack\Performance\Writer;
 
-use hhpack\performance\Writer;
+use HHPack\Performance\Writer;
 
 final class StdoutWriter implements Writer<void>
 {

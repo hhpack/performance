@@ -1,9 +1,9 @@
 <?hh //strict
 
-namespace hhpack\performance\spec\mock;
+namespace HHPack\Performance\Spec\Mock;
 
-use hhpack\performance\ResultReporter;
-use hhpack\performance\result\BenchmarkedResult;
+use HHPack\Performance\ResultReporter;
+use HHPack\Performance\Result\BenchmarkedResult;
 
 final class SpyReporter implements ResultReporter
 {

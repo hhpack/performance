@@ -1,8 +1,8 @@
 <?hh //partial
 
-namespace hhpack\performance\spec\generator;
+namespace HHPack\Performance\Spec\Generator;
 
-use hhpack\performance\generator\DefaultGenerator;
+use HHPack\Performance\Generator\DefaultGenerator;
 
 describe(DefaultGenerator::class, function() {
   describe('->generate()', function() {
