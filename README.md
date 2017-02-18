@@ -12,10 +12,10 @@
 You can measure the time of easy processing.
 
 ```hack
-use hhpack\performance\PerformanceWatcher;
-use hhpack\performance\TimeWatcher;
-use hhpack\performance\MemoryWatcher;
-use hhpack\performance\result\WatchedResult;
+use HHPack\Performance\PerformanceWatcher;
+use HHPack\Performance\TimeWatcher;
+use HHPack\Performance\MemoryWatcher;
+use HHPack\Performance\Result\WatchedResult;
 
 $watcher = PerformanceWatcher::fromItems([
     Pair { 'time', new TimeWatcher() },
@@ -37,7 +37,7 @@ foreach ($texts as $text) {
 ## Benchmark
 
 ```hack
-use hhpack\performance as bench;
+use HHPack\Performance as bench;
 
 function sync_benchmarker() : void
 {
@@ -51,7 +51,7 @@ sync_benchmarker();
 or
 
 ```hack
-use hhpack\performance as bench;
+use HHPack\Performance as bench;
 
 async function async_benchmarker_main() : Awaitable<void>
 {
