@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance;
+namespace HHPack\Performance;
 
 interface Watcher<+T> extends Watchable
 {

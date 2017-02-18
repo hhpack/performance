@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,15 +9,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance\generator;
+namespace HHPack\Performance\Generator;
 
-use hhpack\performance\Watcher;
-use hhpack\performance\WatchedResult;
-use hhpack\performance\WatcherGenerator;
-use hhpack\performance\PerformanceWatcher;
-use hhpack\performance\TimeWatcher;
-use hhpack\performance\MemoryWatcher;
-use hhpack\performance\result\ComplexResult;
+use HHPack\Performance\Watcher;
+use HHPack\Performance\WatchedResult;
+use HHPack\Performance\WatcherGenerator;
+use HHPack\Performance\PerformanceWatcher;
+use HHPack\Performance\TimeWatcher;
+use HHPack\Performance\MemoryWatcher;
+use HHPack\Performance\Result\ComplexResult;
 
 final class DefaultGenerator implements WatcherGenerator<ComplexResult>
 {

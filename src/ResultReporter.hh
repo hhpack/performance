@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance;
+namespace HHPack\Performance;
 
-use hhpack\performance\result\BenchmarkedResult;
+use HHPack\Performance\Result\BenchmarkedResult;
 
 interface ResultReporter
 {

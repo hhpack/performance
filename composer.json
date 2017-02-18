@@ -19,13 +19,13 @@
   },
   "autoload": {
     "psr-4": {
-      "hhpack\\performance\\": "src/"
+      "HHPack\\Performance\\": "src/"
     },
     "files": [ "src/shortcut.hh" ]
   },
   "autoload-dev": {
     "psr-4": {
-      "hhpack\\performance\\spec\\mock\\": "spec/mock/"
+      "HHPack\\Performance\\Spec\\Mock\\": "spec/mock/"
     }
   },
   "scripts": {

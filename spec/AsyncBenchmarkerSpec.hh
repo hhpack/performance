@@ -1,9 +1,9 @@
 <?hh //partial
 
-namespace hhpack\performance\spec;
+namespace HHPack\Performance\Spec;
 
-use hhpack\performance\AsyncBenchmarker;
-use hhpack\performance\spec\mock\SpyReporter;
+use HHPack\Performance\AsyncBenchmarker;
+use HHPack\Performance\Spec\Mock\SpyReporter;
 
 describe(AsyncBenchmarker::class, function() {
   describe('->run()', function() {

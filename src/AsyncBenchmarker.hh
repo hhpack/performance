@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance;
+namespace HHPack\Performance;
 
-use hhpack\performance\reporter\TextReporter;
-use hhpack\performance\generator\DefaultGenerator;
-use hhpack\performance\result\ComplexResult;
-use hhpack\performance\result\BenchmarkedResult;
+use HHPack\Performance\Reporter\TextReporter;
+use HHPack\Performance\Generator\DefaultGenerator;
+use HHPack\Performance\Result\ComplexResult;
+use HHPack\Performance\Result\BenchmarkedResult;
 
 final class AsyncBenchmarker implements BenchmarkRunner<Awaitable<void>>
 {

@@ -1,7 +1,7 @@
 <?hh //partial
 
 /**
- * This file is part of hhpack\performance.
+ * This file is part of hhpack/performance.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\performance\example;
+namespace HHPack\Performance\Example;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\performance\PerformanceWatcher;
-use hhpack\performance\TimeWatcher;
-use hhpack\performance\MemoryWatcher;
+use HHPack\Performance\PerformanceWatcher;
+use HHPack\Performance\TimeWatcher;
+use HHPack\Performance\MemoryWatcher;
 
 function watcher_main() :void
 {

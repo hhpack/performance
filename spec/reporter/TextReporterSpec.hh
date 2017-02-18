@@ -1,13 +1,13 @@
 <?hh //partial
 
-namespace hhpack\performance\spec\reporter;
+namespace HHPack\Performance\Spec\Reporter;
 
-use hhpack\performance\result\ComplexResult;
-use hhpack\performance\result\BenchmarkedResult;
-use hhpack\performance\result\UsedMemory;
-use hhpack\performance\result\ProcessingTime;
-use hhpack\performance\reporter\TextReporter;
-use hhpack\performance\writer\BufferedWriter;
+use HHPack\Performance\Result\ComplexResult;
+use HHPack\Performance\Result\BenchmarkedResult;
+use HHPack\Performance\Result\UsedMemory;
+use HHPack\Performance\Result\ProcessingTime;
+use HHPack\Performance\Reporter\TextReporter;
+use HHPack\Performance\Writer\BufferedWriter;
 
 describe(TextReporter::class, function() {
   describe('->onFinish()', function() {
