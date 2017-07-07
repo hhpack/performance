@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace HHPack\Performance\Spec\Mock;
+namespace HHPack\Performance\Test\Mock;
 
 use HHPack\Performance\ResultReporter;
 use HHPack\Performance\Result\BenchmarkedResult;
@@ -25,5 +25,4 @@ final class SpyReporter implements ResultReporter
     {
         return tuple($this->stopCount, $this->finishCount);
     }
-
 }

@@ -10,12 +10,10 @@
   ],
   "license": "MIT",
   "require": {
-    "hhvm": ">=3.12.0"
+    "hhvm": ">=3.18.0"
   },
   "require-dev": {
-    "expect/peridot-expect-plugin": "~3.0",
-    "peridot-php/peridot": "~1.16",
-    "peridot-php/peridot-dot-reporter": "~1.0"
+    "hackpack/hackunit": "^1.1"
   },
   "autoload": {
     "psr-4": {
@@ -25,11 +23,11 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "HHPack\\Performance\\Spec\\Mock\\": "spec/mock/"
+      "HHPack\\Performance\\Test\\Mock\\": "test/mock/"
     }
   },
   "scripts": {
-    "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh spec",
+    "test": "vendor/bin/hackunit test",
     "check:init": "touch .hhconfig",
     "check": "./typecheck"
   },
