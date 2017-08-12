@@ -13,9 +13,7 @@ namespace HHPack\Performance\Example;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use HHPack\Performance\PerformanceWatcher;
-use HHPack\Performance\TimeWatcher;
-use HHPack\Performance\MemoryWatcher;
+use HHPack\Performance\{ PerformanceWatcher, TimeWatcher, MemoryWatcher };
 
 function watcher_main() :void
 {

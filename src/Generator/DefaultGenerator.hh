@@ -11,13 +11,11 @@
 
 namespace HHPack\Performance\Generator;
 
-use HHPack\Performance\Watcher;
-use HHPack\Performance\WatchedResult;
-use HHPack\Performance\WatcherGenerator;
-use HHPack\Performance\PerformanceWatcher;
-use HHPack\Performance\TimeWatcher;
-use HHPack\Performance\MemoryWatcher;
-use HHPack\Performance\Result\ComplexResult;
+use HHPack\Performance\{
+    Watcher, WatchedResult, WatcherGenerator,
+    PerformanceWatcher, TimeWatcher, MemoryWatcher };
+
+use HHPack\Performance\Result\{ ComplexResult };
 
 final class DefaultGenerator implements WatcherGenerator<ComplexResult>
 {
