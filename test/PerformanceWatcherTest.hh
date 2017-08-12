@@ -2,8 +2,7 @@
 
 namespace HHPack\Performance\Test;
 
-use HHPack\Performance\TimeWatcher;
-use HHPack\Performance\PerformanceWatcher;
+use HHPack\Performance\{ TimeWatcher, PerformanceWatcher };
 use HackPack\HackUnit\Contract\Assert;
 
 final class PerformanceWatcherTest

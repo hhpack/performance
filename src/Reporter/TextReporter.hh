@@ -11,11 +11,10 @@
 
 namespace HHPack\Performance\Reporter;
 
-use HHPack\Performance\Writer;
-use HHPack\Performance\WatchedResult;
-use HHPack\Performance\ResultReporter;
-use HHPack\Performance\Result\BenchmarkedResult;
-use HHPack\Performance\Writer\StdoutWriter;
+use HHPack\Performance\{ Writer, WatchedResult };
+use HHPack\Performance\{ ResultReporter };
+use HHPack\Performance\Result\{ BenchmarkedResult };
+use HHPack\Performance\Writer\{ StdoutWriter };
 
 final class TextReporter implements ResultReporter
 {

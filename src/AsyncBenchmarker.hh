@@ -13,8 +13,7 @@ namespace HHPack\Performance;
 
 use HHPack\Performance\Reporter\TextReporter;
 use HHPack\Performance\Generator\DefaultGenerator;
-use HHPack\Performance\Result\ComplexResult;
-use HHPack\Performance\Result\BenchmarkedResult;
+use HHPack\Performance\Result\{ ComplexResult, BenchmarkedResult };
 
 final class AsyncBenchmarker implements BenchmarkRunner<Awaitable<void>>
 {

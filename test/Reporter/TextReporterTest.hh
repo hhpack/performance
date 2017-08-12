@@ -2,10 +2,7 @@
 
 namespace HHPack\Performance\Test\Reporter;
 
-use HHPack\Performance\Result\ComplexResult;
-use HHPack\Performance\Result\BenchmarkedResult;
-use HHPack\Performance\Result\UsedMemory;
-use HHPack\Performance\Result\ProcessingTime;
+use HHPack\Performance\Result\{ ComplexResult, BenchmarkedResult, UsedMemory, ProcessingTime };
 use HHPack\Performance\Reporter\TextReporter;
 use HHPack\Performance\Writer\BufferedWriter;
 use HackPack\HackUnit\Contract\Assert;
