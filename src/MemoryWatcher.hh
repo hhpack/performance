@@ -13,34 +13,29 @@ namespace HHPack\Performance;
 
 use HHPack\Performance\Result\UsedMemory;
 
-final class MemoryWatcher implements Watcher<UsedMemory>
-{
+final class MemoryWatcher implements Watcher<UsedMemory> {
 
-    private int $startedMemory;
-    private UsedMemory $usedMemory;
+  private int $startedMemory;
+  private UsedMemory $usedMemory;
 
-    public function __construct()
-    {
-        $this->startedMemory = (int) memory_get_usage(true);
-        $this->usedMemory = UsedMemory::of(0);
-    }
+  public function __construct() {
+    $this->startedMemory = (int) memory_get_usage(true);
+    $this->usedMemory = UsedMemory::of(0);
+  }
 
-    public function start() : void
-    {
-        $this->startedMemory = (int) memory_get_usage(true);
-    }
+  public function start(): void {
+    $this->startedMemory = (int) memory_get_usage(true);
+  }
 
-    public function stop() : void
-    {
-        $stoppedMemory = (int) memory_get_usage(true);
+  public function stop(): void {
+    $stoppedMemory = (int) memory_get_usage(true);
 
-        $result = $stoppedMemory - $this->startedMemory;
-        $this->usedMemory = UsedMemory::of($result);
-    }
+    $result = $stoppedMemory - $this->startedMemory;
+    $this->usedMemory = UsedMemory::of($result);
+  }
 
-    public function result() : UsedMemory
-    {
-        return $this->usedMemory;
-    }
+  public function result(): UsedMemory {
+    return $this->usedMemory;
+  }
 
 }

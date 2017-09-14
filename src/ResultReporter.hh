@@ -13,8 +13,7 @@ namespace HHPack\Performance;
 
 use HHPack\Performance\Result\BenchmarkedResult;
 
-interface ResultReporter
-{
-    public function onStop(BenchmarkedResult $result) : void;
-    public function onFinish() : void;
+interface ResultReporter {
+  public function onStop(BenchmarkedResult $result): void;
+  public function onFinish(): void;
 }

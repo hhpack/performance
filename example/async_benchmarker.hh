@@ -11,15 +11,18 @@
 
 namespace HHPack\Performance\Example;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use HHPack\Performance as bench;
 
-async function async_benchmarker_main() : Awaitable<void>
-{
-    await bench\async()->times(10)->run(async () ==> {
+async function async_benchmarker_main(): Awaitable<void> {
+  await bench\async()
+    ->times(10)
+    ->run(
+      async () ==> {
         await \HH\Asio\usleep(2000);
-    });
+      },
+    );
 }
 
 \HH\Asio\join(async_benchmarker_main());

@@ -11,28 +11,29 @@
 
 namespace HHPack\Performance\Example;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
-use HHPack\Performance\{ PerformanceWatcher, TimeWatcher, MemoryWatcher };
+use HHPack\Performance\{PerformanceWatcher, TimeWatcher, MemoryWatcher};
 
-function watcher_main() :void
-{
-    $watcher = PerformanceWatcher::fromItems([
-        Pair { 'time', new TimeWatcher() },
-        Pair { 'memory', new MemoryWatcher() }
-    ]);
+function watcher_main(): void {
+  $watcher = PerformanceWatcher::fromItems(
+    [Pair {'time', new TimeWatcher()}, Pair {'memory', new MemoryWatcher()}],
+  );
 
-    $watcher->start();
-    $watcher->stop();
+  $watcher->start();
+  $watcher->stop();
 
-    $result = $watcher->result();
-    $texts = $result->mapWithKey(($key, $result) ==> {
+  $result = $watcher->result();
+  $texts =
+    $result->mapWithKey(
+      ($key, $result) ==> {
         return sprintf("%s: %s", $key, (string) $result->value());
-    })->values();
+      },
+    )->values();
 
-    foreach ($texts as $text) {
-        echo $text, PHP_EOL;
-    }
+  foreach ($texts as $text) {
+    echo $text, PHP_EOL;
+  }
 }
 
 watcher_main();

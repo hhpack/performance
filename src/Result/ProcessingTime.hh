@@ -13,12 +13,11 @@ namespace HHPack\Performance\Result;
 
 use HHPack\Performance\WatchedResult;
 
-final class ProcessingTime extends NumberResult<float> implements WatchedResult<float>
-{
+final class ProcessingTime extends NumberResult<float>
+  implements WatchedResult<float> {
 
-    public function __toString() : string
-    {
-        return number_format($this->value() * 1000, 2) . ' ms';
-    }
+  public function __toString(): string {
+    return number_format($this->value() * 1000, 2).' ms';
+  }
 
 }

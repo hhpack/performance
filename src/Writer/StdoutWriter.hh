@@ -13,17 +13,14 @@ namespace HHPack\Performance\Writer;
 
 use HHPack\Performance\Writer;
 
-final class StdoutWriter implements Writer<void>
-{
+final class StdoutWriter implements Writer<void> {
 
-    public function write(string $value) : void
-    {
-        fwrite(STDOUT, $value);
-    }
+  public function write(string $value): void {
+    fwrite(STDOUT, $value);
+  }
 
-    public function writeln(string $value) : void
-    {
-        $this->write($value . PHP_EOL);
-    }
+  public function writeln(string $value): void {
+    $this->write($value.PHP_EOL);
+  }
 
 }

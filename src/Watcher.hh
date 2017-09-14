@@ -11,7 +11,6 @@
 
 namespace HHPack\Performance;
 
-interface Watcher<+T> extends Watchable
-{
-    public function result() : T;
+interface Watcher<+T> extends Watchable {
+  public function result(): T;
 }

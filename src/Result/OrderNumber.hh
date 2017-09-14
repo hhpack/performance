@@ -13,12 +13,11 @@ namespace HHPack\Performance\Result;
 
 use HHPack\Performance\WatchedResult;
 
-final class OrderNumber extends NumberResult<int> implements WatchedResult<int>
-{
+final class OrderNumber extends NumberResult<int>
+  implements WatchedResult<int> {
 
-    public function __toString() : string
-    {
-        return (string) $this->value();
-    }
+  public function __toString(): string {
+    return (string) $this->value();
+  }
 
 }

@@ -13,34 +13,29 @@ namespace HHPack\Performance;
 
 use HHPack\Performance\Result\ProcessingTime;
 
-final class TimeWatcher implements Watcher<ProcessingTime>
-{
+final class TimeWatcher implements Watcher<ProcessingTime> {
 
-    private float $startedAt;
-    private ProcessingTime $processingTime;
+  private float $startedAt;
+  private ProcessingTime $processingTime;
 
-    public function __construct()
-    {
-        $this->startedAt = (float) microtime(true);
-        $this->processingTime = ProcessingTime::of(0.0);
-    }
+  public function __construct() {
+    $this->startedAt = (float) microtime(true);
+    $this->processingTime = ProcessingTime::of(0.0);
+  }
 
-    public function start() : void
-    {
-        $this->startedAt = (float) microtime(true);
-    }
+  public function start(): void {
+    $this->startedAt = (float) microtime(true);
+  }
 
-    public function stop() : void
-    {
-        $stoppedAt = (float) microtime(true);
+  public function stop(): void {
+    $stoppedAt = (float) microtime(true);
 
-        $result = $stoppedAt - $this->startedAt;
-        $this->processingTime = ProcessingTime::of($result);
-    }
+    $result = $stoppedAt - $this->startedAt;
+    $this->processingTime = ProcessingTime::of($result);
+  }
 
-    public function result() : ProcessingTime
-    {
-        return $this->processingTime;
-    }
+  public function result(): ProcessingTime {
+    return $this->processingTime;
+  }
 
 }

@@ -11,8 +11,7 @@
 
 namespace HHPack\Performance;
 
-interface Writer<T>
-{
-    public function write(string $value) : T;
-    public function writeln(string $value) : T;
+interface Writer<T> {
+  public function write(string $value): T;
+  public function writeln(string $value): T;
 }

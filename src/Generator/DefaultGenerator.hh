@@ -12,26 +12,33 @@
 namespace HHPack\Performance\Generator;
 
 use HHPack\Performance\{
-    Watcher, WatchedResult, WatcherGenerator,
-    PerformanceWatcher, TimeWatcher, MemoryWatcher };
+  Watcher,
+  WatchedResult,
+  WatcherGenerator,
+  PerformanceWatcher,
+  TimeWatcher,
+  MemoryWatcher
+};
 
-use HHPack\Performance\Result\{ ComplexResult };
+use HHPack\Performance\Result\{ComplexResult};
 
-final class DefaultGenerator implements WatcherGenerator<ComplexResult>
-{
+final class DefaultGenerator implements WatcherGenerator<ComplexResult> {
 
-    public function generate(int $count) : KeyedIterator<int, Watcher<ComplexResult>>
-    {
-        $generator = () ==> {
-            for ($i = 0; $i <= $count - 1; $i++) {
-                $watcher = PerformanceWatcher::fromItems([
-                    Pair { 'time', new TimeWatcher() },
-                    Pair { 'memory', new MemoryWatcher() }
-                ]);
-                yield ($i + 1) => $watcher;
-            }
-        };
-        return $generator();
-    }
+  public function generate(
+    int $count,
+  ): KeyedIterator<int, Watcher<ComplexResult>> {
+    $generator = () ==> {
+      for ($i = 0; $i <= $count - 1; $i++) {
+        $watcher = PerformanceWatcher::fromItems(
+          [
+            Pair {'time', new TimeWatcher()},
+            Pair {'memory', new MemoryWatcher()},
+          ],
+        );
+        yield ($i + 1) => $watcher;
+      }
+    };
+    return $generator();
+  }
 
 }

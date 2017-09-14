@@ -11,14 +11,17 @@
 
 namespace HHPack\Performance\Example;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 use HHPack\Performance as bench;
 
-function sync_benchmarker() : void
-{
-    bench\sync()->times(10)->run(() ==> {
+function sync_benchmarker(): void {
+  bench\sync()
+    ->times(10)
+    ->run(
+      () ==> {
         usleep(2000);
-    });
+      },
+    );
 }
 sync_benchmarker();

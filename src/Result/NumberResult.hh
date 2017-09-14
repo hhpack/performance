@@ -14,23 +14,16 @@ namespace HHPack\Performance\Result;
 use HHPack\Performance\WatchedResult;
 
 <<__ConsistentConstruct>>
-abstract class NumberResult<T as num> implements WatchedResult<T>
-{
+abstract class NumberResult<T as num> implements WatchedResult<T> {
 
-    public function __construct(
-        private T $value
-    )
-    {
-    }
+  public function __construct(private T $value) {}
 
-    public function value() : T
-    {
-        return $this->value;
-    }
+  public function value(): T {
+    return $this->value;
+  }
 
-    public static function of(T $value) : this
-    {
-        return new static($value);
-    }
+  public static function of(T $value): this {
+    return new static($value);
+  }
 
 }

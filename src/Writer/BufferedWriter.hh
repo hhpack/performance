@@ -13,24 +13,20 @@ namespace HHPack\Performance\Writer;
 
 use HHPack\Performance\Writer;
 
-final class BufferedWriter implements Writer<void>
-{
+final class BufferedWriter implements Writer<void> {
 
-    private string $content = '';
+  private string $content = '';
 
-    public function write(string $value) : void
-    {
-        $this->content .= $value;
-    }
+  public function write(string $value): void {
+    $this->content .= $value;
+  }
 
-    public function writeln(string $value) : void
-    {
-        $this->content .= $value . PHP_EOL;
-    }
+  public function writeln(string $value): void {
+    $this->content .= $value.PHP_EOL;
+  }
 
-    public function __toString() : string
-    {
-        return $this->content;
-    }
+  public function __toString(): string {
+    return $this->content;
+  }
 
 }

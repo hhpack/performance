@@ -11,8 +11,7 @@
 
 namespace HHPack\Performance;
 
-interface Watchable
-{
-    public function start() : void;
-    public function stop() : void;
+interface Watchable {
+  public function start(): void;
+  public function stop(): void;
 }

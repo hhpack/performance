@@ -11,8 +11,7 @@
 
 namespace HHPack\Performance;
 
-interface WatchedResult<+T>
-{
-    public function value() : T;
-    public function __toString() : string;
+interface WatchedResult<+T> {
+  public function value(): T;
+  public function __toString(): string;
 }
