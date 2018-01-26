@@ -27,6 +27,12 @@
       "HHPack\\Performance\\Test\\Mock\\": "test/mock/"
     }
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/holyshared/HackUnit"
+    }
+  ],
   "scripts": {
     "test": "vendor/bin/hackunit test",
     "check:init": "touch .hhconfig",
