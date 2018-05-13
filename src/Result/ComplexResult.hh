@@ -83,7 +83,7 @@ final class ComplexResult
 
   public function __toString(): string {
     $values = $this->map(($value) ==> (string) $value)->toValuesArray();
-    return implode(', ', $values);
+    return \implode(', ', $values);
   }
 
   public static function fromItems(

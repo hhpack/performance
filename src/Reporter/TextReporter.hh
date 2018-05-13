@@ -32,7 +32,7 @@ final class TextReporter implements ResultReporter {
     $watchedResult = $result->mapToString();
 
     foreach ($watchedResult as $key => $value) {
-      $length = strlen((string) $value);
+      $length = \strlen((string) $value);
       $paddingLength = $this->paddingLength->get($key);
       $paddingLength = ($paddingLength === null) ? 0 : $paddingLength;
       $this->paddingLength
@@ -53,23 +53,23 @@ final class TextReporter implements ResultReporter {
     $this->paddingLength =
       $this->paddingLength->mapWithKey(
         ($key, $value) ==> {
-          return strlen($key) <= $value ? $value : strlen($key);
+          return \strlen($key) <= $value ? $value : \strlen($key);
         },
       );
 
     $columns =
       $this->paddingLength->mapWithKey(
         ($key, $value) ==> {
-          return str_pad($key, $value, ' ', STR_PAD_RIGHT);
+          return \str_pad($key, $value, ' ', \STR_PAD_RIGHT);
         },
       )->values()->toArray();
 
-    return '| '.implode(' | ', $columns).' |';
+    return '| '.\implode(' | ', $columns).' |';
   }
 
   private function writeHeader(): void {
-    $headerLength = strlen($this->header());
-    $headerSeparator = str_pad('', $headerLength, '-');
+    $headerLength = \strlen($this->header());
+    $headerSeparator = \str_pad('', $headerLength, '-');
 
     $this->writer->writeln($headerSeparator);
     $this->writer->writeln($this->header());
@@ -82,17 +82,17 @@ final class TextReporter implements ResultReporter {
         $result->mapWithKey(
           ($key, $value) ==> {
             $max = $this->paddingLength->at($key);
-            return str_pad($value, $max, ' ', STR_PAD_LEFT);
+            return \str_pad($value, $max, ' ', \STR_PAD_LEFT);
           },
         )->values()->toArray();
-      $this->writer->writeln('| '.implode(' | ', $columns).' |');
+      $this->writer->writeln('| '.\implode(' | ', $columns).' |');
     }
   }
 
   private function writeFooter(): void {
-    $headerLength = strlen($this->header());
-    $headerSeparator = str_pad('', $headerLength, '-');
-    $this->writer->writeln(str_pad('', $headerLength, '-'));
+    $headerLength = \strlen($this->header());
+    $headerSeparator = \str_pad('', $headerLength, '-');
+    $this->writer->writeln(\str_pad('', $headerLength, '-'));
   }
 
 }

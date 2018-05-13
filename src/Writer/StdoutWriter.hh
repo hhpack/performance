@@ -16,11 +16,11 @@ use HHPack\Performance\Writer;
 final class StdoutWriter implements Writer<void> {
 
   public function write(string $value): void {
-    fwrite(STDOUT, $value);
+    \fwrite(\STDOUT, $value);
   }
 
   public function writeln(string $value): void {
-    $this->write($value.PHP_EOL);
+    $this->write($value.\PHP_EOL);
   }
 
 }

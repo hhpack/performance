@@ -16,7 +16,7 @@ final class TextReporterTest {
   <<Test>>
   public function report(Assert $assert): void {
     $writer = new BufferedWriter();
-    $report = file_get_contents(__DIR__.'/../fixtures/text_report.txt');
+    $report = \file_get_contents(__DIR__.'/../fixtures/text_report.txt');
     $reporter = new TextReporter($writer);
 
     $reporter->onStop(

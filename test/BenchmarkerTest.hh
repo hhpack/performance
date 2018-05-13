@@ -16,7 +16,7 @@ final class BenchmarkerTest {
       ->reporter($reporter)
       ->run(
         () ==> {
-          usleep(2000);
+          \usleep(2000);
         },
       );
 

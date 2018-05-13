@@ -19,16 +19,16 @@ final class MemoryWatcher implements Watcher<UsedMemory> {
   private UsedMemory $usedMemory;
 
   public function __construct() {
-    $this->startedMemory = (int) memory_get_usage(true);
+    $this->startedMemory = (int) \memory_get_usage(true);
     $this->usedMemory = UsedMemory::of(0);
   }
 
   public function start(): void {
-    $this->startedMemory = (int) memory_get_usage(true);
+    $this->startedMemory = (int) \memory_get_usage(true);
   }
 
   public function stop(): void {
-    $stoppedMemory = (int) memory_get_usage(true);
+    $stoppedMemory = (int) \memory_get_usage(true);
 
     $result = $stoppedMemory - $this->startedMemory;
     $this->usedMemory = UsedMemory::of($result);

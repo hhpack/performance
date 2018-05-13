@@ -22,7 +22,7 @@ final class BufferedWriter implements Writer<void> {
   }
 
   public function writeln(string $value): void {
-    $this->content .= $value.PHP_EOL;
+    $this->content .= $value.\PHP_EOL;
   }
 
   public function __toString(): string {
