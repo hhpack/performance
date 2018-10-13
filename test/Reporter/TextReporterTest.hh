@@ -6,15 +6,15 @@ use HHPack\Performance\Result\{
   ComplexResult,
   BenchmarkedResult,
   UsedMemory,
-  ProcessingTime
+  ProcessingTime,
 };
 use HHPack\Performance\Reporter\TextReporter;
 use HHPack\Performance\Writer\BufferedWriter;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class TextReporterTest {
-  <<Test>>
-  public function report(Assert $assert): void {
+final class TextReporterTest extends HackTest {
+  public function testReport(): void {
     $writer = new BufferedWriter();
     $report = \file_get_contents(__DIR__.'/../fixtures/text_report.txt');
     $reporter = new TextReporter($writer);
@@ -24,8 +24,8 @@ final class TextReporterTest {
         1,
         new ComplexResult(
           [
-            Pair {'time', ProcessingTime::of(0.003244)},
-            Pair {'memory', UsedMemory::of(132344)},
+            Pair { 'time', ProcessingTime::of(0.003244) },
+            Pair { 'memory', UsedMemory::of(132344) },
           ],
         ),
       ),
@@ -36,8 +36,8 @@ final class TextReporterTest {
         2,
         new ComplexResult(
           [
-            Pair {'time', ProcessingTime::of(0.00324)},
-            Pair {'memory', UsedMemory::of(13244)},
+            Pair { 'time', ProcessingTime::of(0.00324) },
+            Pair { 'memory', UsedMemory::of(13244) },
           ],
         ),
       ),
@@ -45,6 +45,6 @@ final class TextReporterTest {
 
     $reporter->onFinish();
 
-    $assert->string((string) $writer)->is($report);
+    expect((string)$writer)->toBeSame($report);
   }
 }

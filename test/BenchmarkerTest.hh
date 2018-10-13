@@ -4,11 +4,11 @@ namespace HHPack\Performance\Test;
 
 use HHPack\Performance\Benchmarker;
 use HHPack\Performance\Test\Mock\SpyReporter;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class BenchmarkerTest {
-  <<Test>>
-  public function benchmark(Assert $assert): void {
+final class BenchmarkerTest extends HackTest {
+  public function testBenchmark(): void {
     $reporter = new SpyReporter();
     $benchmarker = new Benchmarker();
 
@@ -21,7 +21,7 @@ final class BenchmarkerTest {
       );
 
     list($stopCount, $finishCount) = $reporter->result();
-    $assert->int($stopCount)->eq(3);
-    $assert->int($finishCount)->eq(1);
+    expect($stopCount)->toBeSame(3);
+    expect($finishCount)->toBeSame(1);
   }
 }

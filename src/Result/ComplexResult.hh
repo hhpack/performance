@@ -20,9 +20,10 @@ use HHPack\Performance\WatchedResult;
 // use ConstMapAccess;
 
 final class ComplexResult
-  implements
-    WatchedResult<ImmMap<string, WatchedResult<num>>> //, ConstMapAccess<string, WatchedResult<num>>
- {
+  implements WatchedResult<
+    ImmMap<string, WatchedResult<num>>,
+  > //, ConstMapAccess<string, WatchedResult<num>>
+{
 
   private ImmMap<string, WatchedResult<num>> $watchedResult;
 
@@ -82,7 +83,7 @@ final class ComplexResult
   }
 
   public function __toString(): string {
-    $values = $this->map(($value) ==> (string) $value)->toValuesArray();
+    $values = $this->map(($value) ==> (string)$value)->toValuesArray();
     return \implode(', ', $values);
   }
 

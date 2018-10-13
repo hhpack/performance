@@ -3,11 +3,11 @@
 namespace HHPack\Performance\Test\Generator;
 
 use HHPack\Performance\Generator\DefaultGenerator;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class DefaultGeneratorTest {
-  <<Test>>
-  public function generateWatchers(Assert $assert): void {
+final class DefaultGeneratorTest extends HackTest {
+  public function testGenerateWatchers(): void {
     $generator = new DefaultGenerator();
 
     $orderNumber = Set {};
@@ -17,8 +17,8 @@ final class DefaultGeneratorTest {
       $orderNumber->add($number);
     }
 
-    $assert->int($orderNumber->count())->eq(5);
-    $assert->bool($orderNumber->contains(1))->is(true);
-    $assert->bool($orderNumber->contains(2))->is(true);
+    expect($orderNumber->count())->toBeSame(5);
+    expect($orderNumber->contains(1))->toBeTrue();
+    expect($orderNumber->contains(2))->toBeTrue();
   }
 }

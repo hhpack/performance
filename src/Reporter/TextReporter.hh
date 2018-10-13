@@ -32,7 +32,7 @@ final class TextReporter implements ResultReporter {
     $watchedResult = $result->mapToString();
 
     foreach ($watchedResult as $key => $value) {
-      $length = \strlen((string) $value);
+      $length = \strlen((string)$value);
       $paddingLength = $this->paddingLength->get($key);
       $paddingLength = ($paddingLength === null) ? 0 : $paddingLength;
       $this->paddingLength
@@ -50,19 +50,21 @@ final class TextReporter implements ResultReporter {
 
   <<__Memoize>>
   private function header(): string {
-    $this->paddingLength =
-      $this->paddingLength->mapWithKey(
+    $this->paddingLength = $this->paddingLength
+      ->mapWithKey(
         ($key, $value) ==> {
           return \strlen($key) <= $value ? $value : \strlen($key);
         },
       );
 
-    $columns =
-      $this->paddingLength->mapWithKey(
+    $columns = $this->paddingLength
+      ->mapWithKey(
         ($key, $value) ==> {
           return \str_pad($key, $value, ' ', \STR_PAD_RIGHT);
         },
-      )->values()->toArray();
+      )
+      ->values()
+      ->toArray();
 
     return '| '.\implode(' | ', $columns).' |';
   }
@@ -78,13 +80,14 @@ final class TextReporter implements ResultReporter {
 
   private function writeBody(): void {
     foreach ($this->results as $result) {
-      $columns =
-        $result->mapWithKey(
-          ($key, $value) ==> {
-            $max = $this->paddingLength->at($key);
-            return \str_pad($value, $max, ' ', \STR_PAD_LEFT);
-          },
-        )->values()->toArray();
+      $columns = $result->mapWithKey(
+        ($key, $value) ==> {
+          $max = $this->paddingLength->at($key);
+          return \str_pad($value, $max, ' ', \STR_PAD_LEFT);
+        },
+      )
+        ->values()
+        ->toArray();
       $this->writer->writeln('| '.\implode(' | ', $columns).' |');
     }
   }

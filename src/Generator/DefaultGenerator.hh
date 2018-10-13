@@ -17,7 +17,7 @@ use HHPack\Performance\{
   WatcherGenerator,
   PerformanceWatcher,
   TimeWatcher,
-  MemoryWatcher
+  MemoryWatcher,
 };
 
 use HHPack\Performance\Result\{ComplexResult};
@@ -31,8 +31,8 @@ final class DefaultGenerator implements WatcherGenerator<ComplexResult> {
       for ($i = 0; $i <= $count - 1; $i++) {
         $watcher = PerformanceWatcher::fromItems(
           [
-            Pair {'time', new TimeWatcher()},
-            Pair {'memory', new MemoryWatcher()},
+            Pair { 'time', new TimeWatcher() },
+            Pair { 'memory', new MemoryWatcher() },
           ],
         );
         yield ($i + 1) => $watcher;

@@ -13,7 +13,8 @@ namespace HHPack\Performance\Result;
 
 use HHPack\Performance\WatchedResult;
 
-final class ProcessingTime extends NumberResult<float>
+final class ProcessingTime
+  extends NumberResult<float>
   implements WatchedResult<float> {
 
   public function __toString(): string {

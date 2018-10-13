@@ -1,4 +1,4 @@
-<?hh //partial
+<?hh //strict
 
 /**
  * This file is part of hhpack/performance.
@@ -11,29 +11,33 @@
 
 namespace HHPack\Performance\Example;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/hh_autoload.php';
 
 use HHPack\Performance\{PerformanceWatcher, TimeWatcher, MemoryWatcher};
 
-function watcher_main(): void {
+<<__Entrypoint>>
+function watcher_main(): noreturn {
   $watcher = PerformanceWatcher::fromItems(
-    [Pair {'time', new TimeWatcher()}, Pair {'memory', new MemoryWatcher()}],
+    [
+      Pair { 'time', new TimeWatcher() },
+      Pair { 'memory', new MemoryWatcher() },
+    ],
   );
 
   $watcher->start();
   $watcher->stop();
 
   $result = $watcher->result();
-  $texts =
-    $result->mapWithKey(
-      ($key, $result) ==> {
-        return sprintf("%s: %s", $key, (string) $result->value());
-      },
-    )->values();
+  $texts = $result->mapWithKey(
+    ($key, $result) ==> {
+      return \sprintf("%s: %s", $key, (string)$result->value());
+    },
+  )
+    ->values();
 
   foreach ($texts as $text) {
-    echo $text, PHP_EOL;
+    echo $text, \PHP_EOL;
   }
-}
 
-watcher_main();
+  exit(0);
+}

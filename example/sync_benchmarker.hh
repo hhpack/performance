@@ -1,4 +1,4 @@
-<?hh //partial
+<?hh //strict
 
 /**
  * This file is part of hhpack/performance.
@@ -15,13 +15,14 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use HHPack\Performance as bench;
 
-function sync_benchmarker(): void {
+<<__Entrypoint>>
+function sync_benchmarker(): noreturn {
   bench\sync()
     ->times(10)
     ->run(
       () ==> {
-        usleep(2000);
+        \usleep(2000);
       },
     );
+  exit(0);
 }
-sync_benchmarker();

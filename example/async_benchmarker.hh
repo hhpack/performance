@@ -1,4 +1,4 @@
-<?hh //partial
+<?hh //strict
 
 /**
  * This file is part of hhpack/performance.
@@ -15,7 +15,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use HHPack\Performance as bench;
 
-async function async_benchmarker_main(): Awaitable<void> {
+<<__Entrypoint>>
+async function async_benchmarker_main(): Awaitable<noreturn> {
   await bench\async()
     ->times(10)
     ->run(
@@ -23,6 +24,6 @@ async function async_benchmarker_main(): Awaitable<void> {
         await \HH\Asio\usleep(2000);
       },
     );
-}
 
-\HH\Asio\join(async_benchmarker_main());
+  exit(0);
+}

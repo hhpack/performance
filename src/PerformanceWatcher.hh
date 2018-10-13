@@ -23,7 +23,7 @@ final class PerformanceWatcher implements ComplexWatcher<num> {
     $items = Vector {};
 
     foreach ($watchers as $key => $watcher) {
-      $items->add(Pair {$key, $watcher});
+      $items->add(Pair { $key, $watcher });
     }
 
     $this->watchers = Map::fromItems($items);

@@ -3,17 +3,17 @@
 namespace HHPack\Performance\Test;
 
 use HHPack\Performance\{TimeWatcher, PerformanceWatcher};
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class PerformanceWatcherTest {
-  <<Test>>
-  public function performanceResult(Assert $assert): void {
+final class PerformanceWatcherTest extends HackTest {
+  public function testPerformanceResult(): void {
     $watcher = new PerformanceWatcher(['time' => new TimeWatcher()]);
 
     $watcher->start();
     $watcher->stop();
 
     $result = $watcher->result();
-    $assert->float((float) $result->at('time')->value())->gte(0.0);
+    expect((float)$result->at('time')->value())->toBeGreaterThan(0.0);
   }
 }

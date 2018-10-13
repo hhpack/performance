@@ -3,16 +3,16 @@
 namespace HHPack\Performance\Test;
 
 use HHPack\Performance\MemoryWatcher;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class MemoryWatcherTest {
-  <<Test>>
-  public function memoryResult(Assert $assert): void {
+final class MemoryWatcherTest extends HackTest {
+  public function testMemoryResult(): void {
     $watcher = new MemoryWatcher();
     $watcher->start();
     $watcher->stop();
 
     $result = $watcher->result();
-    $assert->int($result->value())->gte(0);
+    expect($result->value())->toBeGreaterThan(0);
   }
 }

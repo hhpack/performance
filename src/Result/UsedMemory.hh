@@ -13,8 +13,7 @@ namespace HHPack\Performance\Result;
 
 use HHPack\Performance\WatchedResult;
 
-final class UsedMemory extends NumberResult<int>
-  implements WatchedResult<int> {
+final class UsedMemory extends NumberResult<int> implements WatchedResult<int> {
 
   public function __toString(): string {
     return \number_format($this->value() / 1024, 2).' KB';

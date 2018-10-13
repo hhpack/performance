@@ -19,16 +19,16 @@ final class TimeWatcher implements Watcher<ProcessingTime> {
   private ProcessingTime $processingTime;
 
   public function __construct() {
-    $this->startedAt = (float) \microtime(true);
+    $this->startedAt = (float)\microtime(true);
     $this->processingTime = ProcessingTime::of(0.0);
   }
 
   public function start(): void {
-    $this->startedAt = (float) \microtime(true);
+    $this->startedAt = (float)\microtime(true);
   }
 
   public function stop(): void {
-    $stoppedAt = (float) \microtime(true);
+    $stoppedAt = (float)\microtime(true);
 
     $result = $stoppedAt - $this->startedAt;
     $this->processingTime = ProcessingTime::of($result);
